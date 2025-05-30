@@ -1,1 +1,12 @@
-Good Morning
+SIGHUMS Dashboards Repository
+This repository of SIGHUMS Dashboards is a valuable guide for ThingsBoard enthusiasts. It's designed to inspire and facilitate potential freelance development opportunities in a variety of areas, including:
+
+- ThingsBoard Dashboard Development: Create custom, insightful data visualizations.
+- Rule Chain Configuration: Develop complex data processing and automation flows.
+- OTA (Over-The-Air) Configurations: Implement remote updates for devices.
+- Device Programming (Arduino ESP32, C++): Program and integrate devices with ThingsBoard.
+- Direct PostgreSQL Database Configuration: Directly manage and optimize the ThingsBoard database.
+- ThingsBoard PE (Professional Edition) Server Adjustments: Configure and fine-tune your ThingsBoard PE instance for optimal performance.
+- Specialized ThingsBoard Development: Implement unique features and integrations beyond standard functionalities.
+
+For more information, please visit www.sighums.com
