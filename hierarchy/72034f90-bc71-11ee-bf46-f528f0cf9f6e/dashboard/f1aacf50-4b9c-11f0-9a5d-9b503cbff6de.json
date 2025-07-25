@@ -1,0 +1,2162 @@
+{
+  "entityType" : "DASHBOARD",
+  "entity" : {
+    "assignedCustomers" : null,
+    "configuration" : {
+      "description" : "",
+      "widgets" : {
+        "810635a1-960d-8bf1-1b97-458c409ad0a7" : {
+          "isSystemType" : true,
+          "bundleAlias" : "cards",
+          "typeAlias" : "timeseries_table",
+          "type" : "timeseries",
+          "title" : "New widget",
+          "image" : null,
+          "description" : null,
+          "sizeX" : 8,
+          "sizeY" : 6.5,
+          "config" : {
+            "datasources" : [ {
+              "type" : "entity",
+              "name" : null,
+              "entityAliasId" : "09b60ead-b402-fee5-5236-785ecac4f1ec",
+              "filterId" : null,
+              "dataKeys" : [ {
+                "name" : "mantenimiento_fecha_wo",
+                "type" : "timeseries",
+                "label" : "Dias en Taller",
+                "color" : "#03a9f4",
+                "settings" : {
+                  "useCellStyleFunction" : false,
+                  "useCellContentFunction" : true,
+                  "cellContentFunction" : "  if (!value) return '';\r\n\r\n  const now = Date.now()-(3600000*5);\r\n  const diffMs = now - parseInt(value); // Diferencia en milisegundos\r\n  const diffSec = Math.floor(diffMs / 1000);\r\n  const diffMin = Math.floor(diffSec / 60);\r\n  const diffHrs = Math.floor(diffMin / 60);\r\n  const diffDays = Math.floor(diffHrs / 24);\r\n  const diffMonths = Math.floor(diffDays / 30);\r\n  const diffYears = Math.floor(diffDays / 365);\r\n\r\n  let texto = '';\r\n  if (diffYears > 0) {\r\n    texto = `hace ${diffYears} año${diffYears > 1 ? 's' : ''}`;\r\n  } else if (diffMonths > 0) {\r\n    texto = `hace ${diffMonths} mes${diffMonths > 1 ? 'es' : ''}`;\r\n  } else if (diffDays > 0) {\r\n    texto = `hace ${diffDays} día${diffDays > 1 ? 's' : ''}`;\r\n  } else if (diffHrs > 0) {\r\n    texto = `hace ${diffHrs} hora${diffHrs > 1 ? 's' : ''}`;\r\n  } else if (diffMin > 0) {\r\n    texto = `hace ${diffMin} minuto${diffMin > 1 ? 's' : ''}`;\r\n  } else {\r\n    texto = 'hace unos segundos';\r\n  }\r\n\r\n  return `<div style=\"text-align: center; padding: 8px; font-size: 14px;\">\r\n            ⏳ ${texto}\r\n          </div>`;\r\n"
+                },
+                "_hash" : 0.4519507171897268,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              }, {
+                "name" : "mantenimiento_base",
+                "type" : "timeseries",
+                "label" : "base",
+                "color" : "#f44336",
+                "settings" : { },
+                "_hash" : 0.7872069866040845,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              }, {
+                "name" : "mantenimiento_equipo",
+                "type" : "timeseries",
+                "label" : "equipo",
+                "color" : "#ffc107",
+                "settings" : { },
+                "_hash" : 0.8269254491743945,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              }, {
+                "name" : "condicion",
+                "type" : "timeseries",
+                "label" : "Condición",
+                "color" : "#009688",
+                "settings" : {
+                  "useCellStyleFunction" : false,
+                  "useCellContentFunction" : true,
+                  "cellContentFunction" : "function getStatusIndicator(value) {\r\n  let emoji = '';\r\n  let backgroundColor = '';\r\n  \r\n  // Determine emoji and background color based on value\r\n  switch (parseInt(value)) {\r\n    case 1:\r\n      emoji = '✔️';\r\n      backgroundColor = 'rgba(0, 200, 0, 0.1)'; // Light green background\r\n      break;\r\n    case 2:\r\n      emoji = '⚠️';\r\n      backgroundColor = 'rgba(255, 200, 0, 0.1)'; // Light yellow background\r\n      break;\r\n    case 3:\r\n      emoji = '❌';\r\n      backgroundColor = 'rgba(255, 0, 0, 0.1)'; // Light red background\r\n      break;\r\n    default:\r\n      emoji = '❓';\r\n      backgroundColor = 'rgba(200, 200, 200, 0.1)'; // Light gray for unknown values\r\n  }\r\n  \r\n  return `<div style=\"display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; min-height: 40px; background-color: ${backgroundColor}; border-radius: 4px;\">\r\n            <span style=\"font-size: 16px; display: flex; align-items: center; gap: 8px;\">\r\n              ${emoji} ${value}\r\n            </span>\r\n          </div>`;\r\n}\r\n\r\n// Uso en la configuración de estilo de celda\r\nvar statusValue = value; // 'value' es lo que recibe la función de estilo de celda\r\nreturn getStatusIndicator(statusValue);"
+                },
+                "_hash" : 0.9814171563863006,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              }, {
+                "name" : "mantenimiento_reporte_falla",
+                "type" : "timeseries",
+                "label" : "Reporte de Falla",
+                "color" : "#673ab7",
+                "settings" : { },
+                "_hash" : 0.3987367753995843,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              }, {
+                "name" : "mantenimiento_tipo_wo",
+                "type" : "timeseries",
+                "label" : "Tipo WO",
+                "color" : "#e91e63",
+                "settings" : { },
+                "_hash" : 0.7176087922345025,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              }, {
+                "name" : "mantenimiento_fecha_wo",
+                "type" : "timeseries",
+                "label" : "Fecha WO",
+                "color" : "#ffeb3b",
+                "settings" : {
+                  "useCellStyleFunction" : false,
+                  "useCellContentFunction" : true,
+                  "cellContentFunction" : "  if (!value) return '';\r\n\r\n  const date = new Date(parseInt(value));\r\n  const opciones = { day: 'numeric', month: 'long', year: 'numeric' };\r\n  \r\n  // Formato en español\r\n  const fechaFormateada = date.toLocaleDateString('es-ES', opciones);\r\n\r\n  // Puedes personalizar el estilo visual si lo usas en una celda de ThingsBoard\r\n  return `<div style=\"text-align: center; padding: 8px; font-size: 14px;\">\r\n            📅 ${fechaFormateada}\r\n          </div>`;"
+                },
+                "_hash" : 0.6361667336294314,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              }, {
+                "name" : "mantenimiento_etr",
+                "type" : "timeseries",
+                "label" : "ETR (Si lo hay)",
+                "color" : "#ff9800",
+                "settings" : { },
+                "_hash" : 0.9946618302685162,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              }, {
+                "name" : "mantenimiento_observaciones",
+                "type" : "timeseries",
+                "label" : "-_____ Observaciones del reporte _____-",
+                "color" : "#cddc39",
+                "settings" : { },
+                "_hash" : 0.6261814223919604,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              }, {
+                "name" : "mantenimiento_cod",
+                "type" : "timeseries",
+                "label" : "COD",
+                "color" : "#03a9f4",
+                "settings" : { },
+                "_hash" : 0.9427541379530784,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              }, {
+                "name" : "mantenimiento_marca",
+                "type" : "timeseries",
+                "label" : "MARCA",
+                "color" : "#ff9800",
+                "settings" : { },
+                "_hash" : 0.504653267980824,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              }, {
+                "name" : "mantenimiento_modelo",
+                "type" : "timeseries",
+                "label" : "MODELO",
+                "color" : "#673ab7",
+                "settings" : { },
+                "_hash" : 0.13286093735170534,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              }, {
+                "name" : "ts_id",
+                "type" : "timeseries",
+                "label" : "- Fecha -",
+                "color" : "#f44336",
+                "settings" : {
+                  "useCellStyleFunction" : false,
+                  "useCellContentFunction" : true,
+                  "cellContentFunction" : "  if (!value) return '';\r\n  const date = new Date(parseInt(value));\r\n  const opciones = { day: 'numeric', month: 'long', year: 'numeric' };\r\n  \r\n  // Formato en español\r\n  const fechaFormateada = date.toLocaleDateString('es-ES', opciones);\r\n\r\n  // Puedes personalizar el estilo visual si lo usas en una celda de ThingsBoard\r\n  return `<div style=\"text-align: center; padding: 8px; font-size: 14px;\">\r\n            📅 ${fechaFormateada}\r\n          </div>`;\r\n"
+                },
+                "_hash" : 0.351051729660925,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : false,
+                "postFuncBody" : ""
+              } ],
+              "alarmFilterConfig" : {
+                "statusList" : [ "ACTIVE" ]
+              },
+              "latestDataKeys" : [ ]
+            } ],
+            "timewindow" : {
+              "hideInterval" : false,
+              "hideLastInterval" : false,
+              "hideQuickInterval" : false,
+              "hideAggregation" : false,
+              "hideAggInterval" : true,
+              "hideTimezone" : false,
+              "selectedTab" : 1,
+              "history" : {
+                "historyType" : 0,
+                "timewindowMs" : 630720000000,
+                "interval" : 1000,
+                "fixedTimewindow" : {
+                  "startTimeMs" : 1750111108783,
+                  "endTimeMs" : 1750197521644
+                },
+                "quickInterval" : "CURRENT_DAY"
+              },
+              "aggregation" : {
+                "type" : "NONE",
+                "limit" : 50000
+              },
+              "timezone" : null
+            },
+            "showTitle" : true,
+            "backgroundColor" : "rgb(255, 255, 255)",
+            "color" : "rgb(0, 0, 0)",
+            "padding" : "8px",
+            "settings" : {
+              "enableSearch" : true,
+              "enableStickyHeader" : true,
+              "enableStickyAction" : true,
+              "reserveSpaceForHiddenAction" : "true",
+              "showTimestamp" : false,
+              "showMilliseconds" : false,
+              "displayPagination" : false,
+              "useEntityLabel" : true,
+              "hideEmptyLines" : true,
+              "disableStickyHeader" : false,
+              "useRowStyleFunction" : false
+            },
+            "title" : "Historial de Mantenimiento",
+            "dropShadow" : true,
+            "enableFullscreen" : true,
+            "titleStyle" : {
+              "fontSize" : "28px",
+              "fontWeight" : 600,
+              "padding" : "5px 10px 25px 10px"
+            },
+            "useDashboardTimewindow" : false,
+            "showLegend" : false,
+            "widgetStyle" : {
+              "border" : "1px solid #0a3d62",
+              "borderRadius" : "8px",
+              "backgroundColor" : "#ffffff",
+              "paddingTop" : "15px",
+              "paddingLeft" : "15px",
+              "paddingRight" : "15px",
+              "paddingBottom" : "50px",
+              "marginTop" : "10px",
+              "marginBottom" : "10px",
+              "marginLeft" : "10px",
+              "marginRight" : "10px",
+              "boxShadow" : "0 4px 12px rgba(10, 61, 98, 0.1)",
+              "fontFamily" : "'Roboto', Arial, sans-serif",
+              "color" : "#333333",
+              "transition" : "all 0.2s ease-in-out",
+              "width" : "calc(100% - 20px)",
+              "boxSizing" : "border-box",
+              "overflow" : "hidden"
+            },
+            "actions" : {
+              "rowClick" : [ ],
+              "actionCellButton" : [ {
+                "name" : "Borrar Registro",
+                "icon" : "delete_forever",
+                "useShowWidgetActionFunction" : null,
+                "showWidgetActionFunction" : "return true;",
+                "type" : "custom",
+                "customFunction" : "// Función para manejar el clic en la fila de la serie temporal\r\nfunction handleRowClick(additionalParams) {\r\n    // Obtener el timestamp directamente desde los parámetros adicionales\r\n    let timestamp = additionalParams['formattedTs'];\r\n\r\n    if (!timestamp) {\r\n        console.error(\"El valor de 'formattedTs' no está definido. Verifica los parámetros adicionales.\");\r\n        return;\r\n    }\r\n\r\n    // Convertir el timestamp a un valor numérico en milisegundos\r\n    let ts = Date.parse(timestamp.replace(' ', 'T'));\r\n\r\n    if (isNaN(ts)) {\r\n        console.error(\"El valor del timestamp no es válido. Verifica el formato de la fecha:\", timestamp);\r\n        return;\r\n    }\r\n\r\n    console.log(\"Timestamp convertido a milisegundos:\", ts);\r\n\r\n    // Definir el rango del timestamp +/- 5000 ms (5 segundos)\r\n    let startTs = ts - 5000;\r\n    let endTs = ts + 5000;\r\n\r\n    // Intentar actualizar la ventana de tiempo del Dashboard\r\n    updateDashboardTimeWindow(startTs, endTs);\r\n}\r\n\r\n// Función para actualizar la ventana de tiempo del Dashboard\r\nfunction updateDashboardTimeWindow(startTs, endTs) {\r\n    console.log(\"Intentando actualizar la ventana de tiempo a:\", { startTs, endTs });\r\n\r\n    if (widgetContext.timewindowFunctions && typeof widgetContext.timewindowFunctions.onUpdateTimewindow === 'function') {\r\n        try {\r\n            // Usar el método onUpdateTimewindow si existe\r\n            widgetContext.timewindowFunctions.onUpdateTimewindow(startTs, endTs, null);\r\n            console.log(\"Ventana de tiempo actualizada usando onUpdateTimewindow.\");\r\n        } catch (error) {\r\n            console.error(\"Error al intentar actualizar la ventana de tiempo con onUpdateTimewindow:\", error);\r\n        }\r\n    } else {\r\n        console.error(\"No se encontró la función adecuada para actualizar la ventana de tiempo. Verificar el widgetContext.\");\r\n    }\r\n\r\n    // Actualizar alias del widget para reflejar los nuevos datos\r\n    setTimeout(() => {\r\n        console.log(\"Actualizando aliases del widget...\");\r\n        widgetContext.updateAliases();\r\n    }, 500);\r\n}\r\n\r\n// Ejemplo de cómo sería llamado `handleRowClick`\r\n// Esto se debería invocar cuando el usuario haga clic en una fila de la tabla de la serie temporal\r\nhandleRowClick(additionalParams);\r\n\r\nlet choose = confirm('¿Seguro que desea eliminar la Telemetría?');\r\nif (!choose) return;\r\n    \r\nconsole.log('widgetContext',widgetContext);\r\n\r\n// Los datos que están seleccionados para ocultarse en el widget no reflejan arrays en widgetContext.data, sólo los elementos no seleccionados y con telemetrí existente en el rango de tiempo tienen longitud diferente de 0\r\n\r\nlet timeseries = [];\r\n\r\nwidgetContext.data.forEach( dSource => {\r\n    // Toma los data que tienen valores visibles\r\n    if (dSource.data.length > 0){\r\n        // console.log('La tomó : ',dSource.dataKey.name);\r\n        timeseries.push({key:dSource.dataKey.name});\r\n    }\r\n});\r\nlet endTs = Math.floor(widgetContext.timeWindow.maxTime);\r\nlet startTs = Math.floor(widgetContext.timeWindow.minTime);\r\n\r\nconsole.log(entityId, timeseries, false, startTs, endTs);\r\n\r\nwidgetContext.attributeService.deleteEntityTimeseries(entityId, timeseries, false, startTs, endTs).subscribe((res)=>{console.log(res)});\r\n\r\n\r\n// Obtener la fecha y hora actuales en milisegundos\r\nlet now = Date.now();\r\n\r\n// Actualizar la ventana de tiempo del Dashboard\r\nresetDashboardTimeWindow();\r\n\r\nfunction resetDashboardTimeWindow() {\r\n    console.log(\"Intentando restablecer la ventana de tiempo.\");\r\n\r\n    if (widgetContext.timewindowFunctions && typeof widgetContext.timewindowFunctions.onResetTimewindow === 'function') {\r\n        try {\r\n            widgetContext.timewindowFunctions.onResetTimewindow();\r\n            console.log(\"Ventana de tiempo restablecida usando onResetTimewindow.\");\r\n        } catch (error) {\r\n            console.error(\"Error al intentar restablecer la ventana de tiempo:\", error);\r\n        }\r\n    } else {\r\n        console.error(\"No se encontró la función para restablecer la ventana de tiempo.\");\r\n    }\r\n\r\n    setTimeout(() => {\r\n        console.log(\"Actualizando aliases del widget...\");\r\n        widgetContext.updateAliases();\r\n    }, 500);\r\n}",
+                "openInSeparateDialog" : false,
+                "openInPopover" : false,
+                "id" : "04afca8b-d12a-9810-a684-40a7e574a5e7"
+              }, {
+                "name" : "Editar Entrada de MTTO",
+                "icon" : "edit",
+                "useShowWidgetActionFunction" : null,
+                "showWidgetActionFunction" : "return true;",
+                "type" : "custom",
+                "customFunction" : "// Obtener cosas como id y Name\r\nconst log = console.log\r\nlog(\"Datos completos recibidos:\", additionalParams)\r\nlog(\"EntityId recibido:\", additionalParams.entityId)\r\nlog(\"EntityName recibido:\", additionalParams.entityName)\r\n\r\n// Usar el entityId y entityName de additionalParams en lugar de variables globales\r\nconst currentEntityId = additionalParams.entityId || entityId\r\nconst currentEntityName = additionalParams.entityName || entityName\r\n\r\nlog(\"EntityId que se usará:\", currentEntityId)\r\nlog(\"EntityName que se usará:\", currentEntityName)\r\n\r\n// Obtener la telemetria y claves de datos para mantenimiento\r\nconst $injector = widgetContext.$scope.$injector\r\nconst attributeService = $injector.get(widgetContext.servicesMap.get(\"attributeService\"))\r\nconst ts_id = additionalParams[\"0\"]\r\nconst keys = [\r\n  \"ts_id\",\r\n  \"mantenimiento_base\",\r\n  \"mantenimiento_equipo\",\r\n  \"mantenimiento_cod\",\r\n  \"mantenimiento_tipo\",\r\n  \"mantenimiento_marca\",\r\n  \"mantenimiento_modelo\",\r\n  \"condicion\",\r\n  \"mantenimiento_tipo_wo\",\r\n  \"mantenimiento_reporte_falla\",\r\n  \"mantenimiento_fecha_wo\",\r\n  \"mantenimiento_dias_en_taller\",\r\n  \"mantenimiento_etr\",\r\n  \"mantenimiento_observaciones\",\r\n  \"mantenimiento_posicion\",\r\n]\r\n\r\nattributeService.getEntityTimeseries(currentEntityId, keys, ts_id - 2, ts_id + 2).subscribe((telemetry) => {\r\n  const attributesData = []\r\n  const attsToDelete = [{ key: \"mondáquenuncavaaexistir\" }]\r\n\r\n  for (const key of keys) {\r\n    if (telemetry[key]) attributesData.push({ key: key, value: telemetry[key][0].value })\r\n    else attsToDelete.push({ key: key })\r\n  }\r\n\r\n  updateAttributes(attributesData, attsToDelete, currentEntityId)\r\n})\r\n\r\nfunction updateAttributes(attributesData, attsToDelete, entityId) {\r\n  attributeService.saveEntityAttributes(entityId, \"SHARED_SCOPE\", attributesData).subscribe(() => {\r\n    attributeService.deleteEntityAttributes(entityId, \"SHARED_SCOPE\", attsToDelete).subscribe(() => {\r\n      widgetContext.updateAliases()\r\n      setTimeout(() => {\r\n        openDashboardState(\"editar_mantenimiento\", entityId, currentEntityName)\r\n      }, 100)\r\n    })\r\n  })\r\n}\r\n\r\nfunction openDashboardState(stateId, entityId, entityName) {\r\n  log(\"Abriendo estado del dashboard con:\", { stateId, entityId, entityName })\r\n  const params = { entityId, entityName }\r\n  widgetContext.stateController.openState(stateId, params, false)\r\n}\r\n\r\n// Asegúrate de que esto use los valores correctos\r\nsetTimeout(() => {\r\n  openDashboardState(\"editar_mantenimiento\", currentEntityId, currentEntityName)\r\n}, 100)\r\n",
+                "openInSeparateDialog" : false,
+                "openInPopover" : false,
+                "id" : "65f0d45d-5321-a961-b684-2a0801994b23"
+              } ],
+              "headerButton" : [ ]
+            },
+            "showTitleIcon" : true,
+            "iconColor" : "#FF6900",
+            "iconSize" : "24px",
+            "displayTimewindow" : false,
+            "titleTooltip" : "",
+            "enableDataExport" : true,
+            "widgetCss" : "/* Add this to your widget's CSS settings */\r\n\r\n/* Subtle hover effect for table rows */\r\n.mat-mdc-row:hover {\r\n  background-color: rgba(0, 120, 212, 0.08) !important; /* Soft blue with low opacity */\r\n  transition: background-color 0.2s ease;\r\n  border-left: 3px solid rgba(0, 120, 212, 0.5) !important;\r\n}\r\n\r\n/* Alternative orange hover effect - uncomment to use this instead */\r\n/*\r\n.mat-mdc-row:hover {\r\n  background-color: rgba(255, 149, 0, 0.08) !important; \r\n  transition: background-color 0.2s ease;\r\n  border-left: 3px solid rgba(255, 149, 0, 0.5) !important;\r\n}\r\n*/\r\n\r\n/* Improve the appearance of cells on hover */\r\n.mat-mdc-row:hover .mat-mdc-cell {\r\n  color: rgba(0, 0, 0, 0.87); /* Slightly darker text on hover */\r\n}\r\n\r\n/* Add a subtle transition effect to all cells */\r\n.mat-mdc-cell {\r\n  transition: all 0.2s ease;\r\n}\r\n\r\n/* Optional: Add a subtle shadow effect on hover */\r\n.mat-mdc-row:hover {\r\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);\r\n  position: relative;\r\n  z-index: 1;\r\n}\r\n\r\n\r\n/* color grisesito del fondo del titulo de las tablas */\r\n.tb-table-widget .mat-mdc-header-row *,\r\n.tb-table-widget thead * {\r\n  background-color: #f5f5f5 !important;\r\n  color: #616161 !important;\r\n}\r\n\r\n/* el borde redondeadoa */\r\n.tb-table-widget {\r\n  border-radius: 8px !important;\r\n  overflow: hidden !important;\r\n}\r\n\r\n/* Estilos para las filas alternadas (como en de all laminatros en el otro widget) */\r\n.mat-mdc-row:nth-child(even) {\r\n  background-color: #fafafa !important;\r\n}\r\n\r\n/* Estilos para el hover en las filas (como en tu CSS) */\r\n.mat-mdc-row:hover {\r\n  background-color: #f5f5f5 !important;\r\n}\r\n\r\n/* Mejora de los bordes de la tabla (como en tu CSS) */\r\n.mdc-data-table__header-row {\r\n  border-bottom: 1px solid #e0e0e0 !important;\r\n}\r\n",
+            "pageSize" : 1024,
+            "noDataDisplayMessage" : "",
+            "titleIcon" : "history_toggle_off"
+          },
+          "row" : 0,
+          "col" : 0,
+          "id" : "810635a1-960d-8bf1-1b97-458c409ad0a7"
+        },
+        "cdd28e91-5d8c-a5eb-9712-725e65d222aa" : {
+          "isSystemType" : true,
+          "bundleAlias" : "cards",
+          "typeAlias" : "html_value_card",
+          "type" : "latest",
+          "title" : "New widget",
+          "image" : null,
+          "description" : null,
+          "sizeX" : 7.5,
+          "sizeY" : 3,
+          "config" : {
+            "datasources" : [ {
+              "type" : "entity",
+              "name" : null,
+              "entityAliasId" : "298dab6b-fd56-d92b-b098-860aa22a5e90",
+              "filterId" : null,
+              "dataKeys" : [ {
+                "name" : "recarga_fechayhora",
+                "type" : "timeseries",
+                "label" : "recarga_fechayhora",
+                "color" : "#2196f3",
+                "settings" : { },
+                "_hash" : 0.5770478496825646
+              }, {
+                "name" : "recarga_galones_suministrados",
+                "type" : "timeseries",
+                "label" : "recarga_galones_suministrados",
+                "color" : "#4caf50",
+                "settings" : { },
+                "_hash" : 0.6079988622403563
+              }, {
+                "name" : "recarga_nombreOperario",
+                "type" : "timeseries",
+                "label" : "recarga_nombreOperario",
+                "color" : "#f44336",
+                "settings" : { },
+                "_hash" : 0.19435468030410186
+              }, {
+                "name" : "recarga_odometer",
+                "type" : "timeseries",
+                "label" : "recarga_odometer",
+                "color" : "#ffc107",
+                "settings" : { },
+                "_hash" : 0.7587460765381708
+              }, {
+                "name" : "recarga_perdida_recarga_anterior",
+                "type" : "timeseries",
+                "label" : "recarga_perdida_recarga_anterior",
+                "color" : "#607d8b",
+                "settings" : { },
+                "_hash" : 0.7824480811594376
+              }, {
+                "name" : "recarga_precio_galon",
+                "type" : "timeseries",
+                "label" : "recarga_precio_galon",
+                "color" : "#9c27b0",
+                "settings" : { },
+                "_hash" : 0.2658145793243647
+              }, {
+                "name" : "recarga_tanque_lleno",
+                "type" : "timeseries",
+                "label" : "recarga_tanque_lleno",
+                "color" : "#8bc34a",
+                "settings" : { },
+                "_hash" : 0.26835248290457003
+              }, {
+                "name" : "recarga_tipo_combustible",
+                "type" : "timeseries",
+                "label" : "recarga_tipo_combustible",
+                "color" : "#3f51b5",
+                "settings" : { },
+                "_hash" : 0.05556143006757952
+              } ],
+              "alarmFilterConfig" : {
+                "statusList" : [ "ACTIVE" ]
+              }
+            } ],
+            "timewindow" : {
+              "displayValue" : "",
+              "selectedTab" : 0,
+              "realtime" : {
+                "realtimeType" : 1,
+                "interval" : 1000,
+                "timewindowMs" : 60000,
+                "quickInterval" : "CURRENT_DAY"
+              },
+              "history" : {
+                "historyType" : 0,
+                "interval" : 1000,
+                "timewindowMs" : 60000,
+                "fixedTimewindow" : {
+                  "startTimeMs" : 1729398693804,
+                  "endTimeMs" : 1729485093804
+                },
+                "quickInterval" : "CURRENT_DAY"
+              },
+              "aggregation" : {
+                "type" : "AVG",
+                "limit" : 25000
+              }
+            },
+            "showTitle" : false,
+            "backgroundColor" : "#fff",
+            "color" : "rgba(0, 0, 0, 0.87)",
+            "padding" : "0px",
+            "settings" : {
+              "cardHtml" : "<div class=\"value-card\">\n  <label for=\"recarga_odometer\">Odómetro:</label>\n  <input id=\"recarga_odometer\" type=\"number\" step=\"1\" value=\"${recarga_odometer}\" placeholder=\"Ingrese valor de odómetro\" />\n\n  <label for=\"recarga_galones_suministrados\">Galones Suministrados:</label>\n  <input id=\"recarga_galones_suministrados\" type=\"number\" step=\"0.1\" value=\"${recarga_galones_suministrados}\" placeholder=\"Ingrese galones\" />\n\n  <label for=\"recarga_fecha\">Fecha:</label>\n  <input id=\"recarga_fecha\" type=\"date\" />\n\n  <button id=\"saveButton\">Guardar Valores</button>\n  <button id=\"deleteButton\">Borrar Valores</button>\n</div>\n",
+              "cardCss" : ".value-card {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 10px;\r\n}\r\n\r\ninput {\r\n  padding: 8px;\r\n  font-size: 16px;\r\n}\r\n\r\nbutton {\r\n  padding: 10px;\r\n  background-color: #007bff;\r\n  color: white;\r\n  border: none;\r\n  cursor: pointer;\r\n}\r\n\r\nbutton:hover {\r\n  background-color: #0056b3;\r\n}\r\n\r\n#deleteButton {\r\n  background-color: #dc3545;\r\n}\r\n\r\n#deleteButton:hover {\r\n  background-color: #c82333;\r\n}\r\n"
+            },
+            "title" : "New HTML Value Card",
+            "dropShadow" : false,
+            "enableFullscreen" : true,
+            "widgetStyle" : { },
+            "titleStyle" : {
+              "fontSize" : "16px",
+              "fontWeight" : 400
+            },
+            "useDashboardTimewindow" : true,
+            "showLegend" : false,
+            "actions" : {
+              "elementClick" : [ {
+                "name" : "saveButton",
+                "icon" : "more_horiz",
+                "useShowWidgetActionFunction" : null,
+                "showWidgetActionFunction" : "return true;",
+                "type" : "custom",
+                "customFunction" : "    function waitForElement(selector, callback) {\r\n        const element = document.querySelector(selector);\r\n        if (element) {\r\n            callback(element);\r\n        } else {\r\n            console.log(`Esperando al elemento con selector: ${selector}`);\r\n            setTimeout(() => waitForElement(selector, callback), 100);\r\n        }\r\n    }\r\n\r\n    // Esperar al botón antes de continuar\r\n    waitForElement(\"#saveButton\", function(saveButton) {\r\n        console.log(\"Botón 'Guardar' encontrado\");\r\n\r\n        saveButton.addEventListener(\"click\", function() {\r\n            console.log(\"Botón 'Guardar' clicado\");\r\n\r\n            // Obtener los valores de los inputs\r\n            const odometerElement = document.getElementById(\"recarga_odometer\");\r\n            const galonesElement = document.getElementById(\"recarga_galones_suministrados\");\r\n            const fechaElement = document.getElementById(\"recarga_fecha\");\r\n\r\n            if (odometerElement && galonesElement) {\r\n                console.log(\"Inputs encontrados: \", odometerElement, galonesElement);\r\n            } else {\r\n                console.error(\"Alguno de los inputs no fue encontrado. Verificar HTML\");\r\n            }\r\n\r\n            const odometerValue = odometerElement ? odometerElement.value : null;\r\n            const galonesValue = galonesElement ? galonesElement.value : null;\r\n            const fechaValue = fechaElement ? new Date(fechaElement.value).getTime() : new Date().getTime();\r\n\r\n            console.log(\"Valor del odómetro:\", odometerValue);\r\n            console.log(\"Valor de galones suministrados:\", galonesValue);\r\n\r\n            // Verificar si los valores están definidos\r\n            if (!odometerValue || !galonesValue) {\r\n                console.error(\"Algunos valores de los inputs están vacíos o no definidos.\");\r\n                return;\r\n            }\r\n\r\n            // Crear el objeto valuesHash con los datos que queremos enviar\r\n            let valuesHash = {\r\n                recarga_odometer: parseFloat(odometerValue),\r\n                recarga_galones_suministrados: parseFloat(galonesValue),\r\n                ts_id: fechaValue,\r\n                fltNum: entityName\r\n            };\r\n\r\n            console.log(\"Objeto valuesHash creado:\", valuesHash);\r\n\r\n            let telemetryHashArray = [{ key: 'ts', value: fechaValue }, { key: 'values', value: valuesHash }];\r\n            console.log(\"Estructura telemetryHashArray creada:\", telemetryHashArray);\r\n\r\n            let $injector = widgetContext.$scope.$injector;\r\n            let attributeService = $injector.get(widgetContext.servicesMap.get('attributeService'));\r\n\r\n            if (!attributeService) {\r\n                console.error(\"El servicio attributeService no fue encontrado\");\r\n                return;\r\n            }\r\n\r\n            console.log(\"attributeService encontrado:\", attributeService);\r\n\r\n            attributeService.saveEntityTimeseries(entityId, 'ANY', telemetryHashArray)\r\n                .subscribe(\r\n                    function() {\r\n                        console.log('Telemetry saved correctamente');\r\n                        setTimeout(() => {\r\n                            console.log(\"Actualizando aliases del widget...\");\r\n                            widgetContext.updateAliases();\r\n                        }, 2000);\r\n                    },\r\n                    function(error) {\r\n                        console.error('Error al guardar la telemetría:', error);\r\n                    }\r\n                );\r\n        });\r\n    });",
+                "openInSeparateDialog" : false,
+                "openInPopover" : false,
+                "id" : "917fa9ec-30cc-c146-8ca8-f700f7ba74a1"
+              }, {
+                "name" : "deleteButton",
+                "icon" : "more_horiz",
+                "useShowWidgetActionFunction" : null,
+                "showWidgetActionFunction" : "return true;",
+                "type" : "custom",
+                "customFunction" : "function waitForElement(selector, callback) {\r\n    const element = document.querySelector(selector);\r\n    if (element) {\r\n        callback(element);\r\n    } else {\r\n        console.log(`Esperando al elemento con selector: ${selector}`);\r\n        setTimeout(() => waitForElement(selector, callback), 100);\r\n    }\r\n}\r\n\r\n// Esperar al botón 'Guardar' antes de continuar\r\nwaitForElement(\"#saveButton\", function(saveButton) {\r\n    console.log(\"Botón 'Guardar' encontrado\");\r\n\r\n    saveButton.addEventListener(\"click\", function() {\r\n        console.log(\"Botón 'Guardar' clicado\");\r\n\r\n        // Obtener los valores de los inputs\r\n        const odometerElement = document.getElementById(\"recarga_odometer\");\r\n        const galonesElement = document.getElementById(\"recarga_galones_suministrados\");\r\n        const fechaElement = document.getElementById(\"recarga_fecha\");\r\n\r\n        if (odometerElement && galonesElement) {\r\n            console.log(\"Inputs encontrados: \", odometerElement, galonesElement);\r\n        } else {\r\n            console.error(\"Alguno de los inputs no fue encontrado. Verificar HTML\");\r\n        }\r\n\r\n        const odometerValue = odometerElement ? odometerElement.value : null;\r\n        const galonesValue = galonesElement ? galonesElement.value : null;\r\n        const fechaValue = fechaElement ? new Date(fechaElement.value).getTime() : new Date().getTime();\r\n\r\n        console.log(\"Valor del odómetro:\", odometerValue);\r\n        console.log(\"Valor de galones suministrados:\", galonesValue);\r\n\r\n        // Verificar si los valores están definidos\r\n        if (!odometerValue || !galonesValue) {\r\n            console.error(\"Algunos valores de los inputs están vacíos o no definidos.\");\r\n            return;\r\n        }\r\n\r\n        // Crear el objeto valuesHash con los datos que queremos enviar\r\n        let valuesHash = {\r\n            recarga_odometer: parseFloat(odometerValue),\r\n            recarga_galones_suministrados: parseFloat(galonesValue),\r\n            ts_id: fechaValue,\r\n            fltNum: entityName\r\n        };\r\n\r\n        console.log(\"Objeto valuesHash creado:\", valuesHash);\r\n\r\n        let telemetryHashArray = [{ key: 'ts', value: fechaValue }, { key: 'values', value: valuesHash }];\r\n        console.log(\"Estructura telemetryHashArray creada:\", telemetryHashArray);\r\n\r\n        let $injector = widgetContext.$scope.$injector;\r\n        let attributeService = $injector.get(widgetContext.servicesMap.get('attributeService'));\r\n\r\n        if (!attributeService) {\r\n            console.error(\"El servicio attributeService no fue encontrado\");\r\n            return;\r\n        }\r\n\r\n        console.log(\"attributeService encontrado:\", attributeService);\r\n\r\n        attributeService.saveEntityTimeseries(entityId, 'ANY', telemetryHashArray)\r\n            .subscribe(\r\n                function() {\r\n                    console.log('Telemetry saved correctamente');\r\n                    setTimeout(() => {\r\n                        console.log(\"Actualizando aliases del widget...\");\r\n                        widgetContext.updateAliases();\r\n                    }, 2000);\r\n                },\r\n                function(error) {\r\n                    console.error('Error al guardar la telemetría:', error);\r\n                }\r\n            );\r\n    });\r\n});\r\n\r\n// Esperar al botón 'Borrar' antes de continuar\r\nwaitForElement(\"#deleteButton\", function(deleteButton) {\r\n    console.log(\"Botón 'Borrar' encontrado\");\r\n\r\n    deleteButton.addEventListener(\"click\", function() {\r\n        console.log(\"Botón 'Borrar' clicado\");\r\n\r\n        // Borrar los valores de los inputs\r\n        document.getElementById(\"recarga_odometer\").value = '';\r\n        document.getElementById(\"recarga_galones_suministrados\").value = '';\r\n        document.getElementById(\"recarga_fecha\").value = '';\r\n\r\n        console.log(\"Valores de los inputs borrados\");\r\n    });\r\n});\r\n",
+                "openInSeparateDialog" : false,
+                "openInPopover" : false,
+                "id" : "808012ae-98de-ef39-c8d9-0649020cce79"
+              } ]
+            }
+          },
+          "row" : 0,
+          "col" : 0,
+          "id" : "cdd28e91-5d8c-a5eb-9712-725e65d222aa"
+        },
+        "07941c70-a0dc-c833-55c6-df4012e5f3f2" : {
+          "isSystemType" : true,
+          "bundleAlias" : "cards",
+          "typeAlias" : "html_value_card",
+          "type" : "latest",
+          "title" : "New widget",
+          "image" : null,
+          "description" : null,
+          "sizeX" : 7.5,
+          "sizeY" : 3,
+          "config" : {
+            "datasources" : [ {
+              "type" : "entity",
+              "name" : null,
+              "entityAliasId" : "09b60ead-b402-fee5-5236-785ecac4f1ec",
+              "filterId" : null,
+              "dataKeys" : [ {
+                "name" : "name",
+                "type" : "entityField",
+                "label" : "Name",
+                "color" : "#e91e63",
+                "settings" : { },
+                "_hash" : 0.5676635743212892
+              }, {
+                "name" : "CityNo",
+                "type" : "attribute",
+                "label" : "codName",
+                "color" : "#2962ff",
+                "settings" : { },
+                "_hash" : 0.5498963595824347,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : true,
+                "postFuncBody" : "let formattedValue = isNaN(value) ? `:${value}` : `:0${Math.floor(value)}`;\r\n\r\nreturn formattedValue"
+              }, {
+                "name" : "City",
+                "type" : "attribute",
+                "label" : "City",
+                "color" : "#f44336",
+                "settings" : { },
+                "_hash" : 0.09051271028003804
+              }, {
+                "name" : "Power1",
+                "type" : "attribute",
+                "label" : "Power1",
+                "color" : "#607d8b",
+                "settings" : { },
+                "_hash" : 0.9066403572558213
+              }, {
+                "name" : "YearBuilt",
+                "type" : "attribute",
+                "label" : "YearBuilt",
+                "color" : "#8bc34a",
+                "settings" : { },
+                "_hash" : 0.2780325544759594
+              }, {
+                "name" : "MARCA",
+                "type" : "attribute",
+                "label" : "MARCA",
+                "color" : "#9c27b0",
+                "settings" : { },
+                "_hash" : 0.56316986864469
+              }, {
+                "name" : "COD",
+                "type" : "attribute",
+                "label" : "COD",
+                "color" : "#8bc34a",
+                "settings" : { },
+                "_hash" : 0.9448943964773084
+              }, {
+                "name" : "MODELO",
+                "type" : "attribute",
+                "label" : "MODELO",
+                "color" : "#3f51b5",
+                "settings" : { },
+                "_hash" : 0.2727644220622385
+              } ],
+              "alarmFilterConfig" : {
+                "statusList" : [ "ACTIVE" ]
+              }
+            } ],
+            "timewindow" : {
+              "displayValue" : "",
+              "selectedTab" : 0,
+              "realtime" : {
+                "realtimeType" : 1,
+                "interval" : 1000,
+                "timewindowMs" : 60000,
+                "quickInterval" : "CURRENT_DAY"
+              },
+              "history" : {
+                "historyType" : 0,
+                "interval" : 1000,
+                "timewindowMs" : 60000,
+                "fixedTimewindow" : {
+                  "startTimeMs" : 1729398693804,
+                  "endTimeMs" : 1729485093804
+                },
+                "quickInterval" : "CURRENT_DAY"
+              },
+              "aggregation" : {
+                "type" : "AVG",
+                "limit" : 25000
+              }
+            },
+            "showTitle" : true,
+            "backgroundColor" : "#FFFFFF00",
+            "color" : "rgba(0, 0, 0, 0.87)",
+            "padding" : "0px",
+            "settings" : {
+              "cardHtml" : "<!DOCTYPE html>\r\n<html lang=\"es\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Formulario de Mantenimiento</title>\r\n    <link rel=\"stylesheet\" href=\"maintenance-form-compact.css\">\r\n</head>\r\n<body>\r\n    <form id=\"maintenanceForm\">\r\n        <div>\r\n            <label for=\"condicion\">Condición:</label>\r\n            <select id=\"condicion\" name=\"condicion\">\r\n                <option value=\"\">Seleccione la condición</option>\r\n                <option value=\"1\">✔️ Operativo</option>\r\n                <option value=\"2\">⚠️ Desconocido</option>\r\n                <option value=\"3\">❌ Inoperativo</option>\r\n            </select>\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"base\">Base:</label>\r\n            <input type=\"text\" id=\"base\" name=\"base\" value=\"${City}\">\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"equipo\">Equipo:</label>\r\n            <input type=\"text\" id=\"equipo\" name=\"equipo\" value=\"${Name:0}\">\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"cod\">COD:</label>\r\n            <input type=\"text\" id=\"cod\" name=\"cod\" value=\"${COD:0}\">\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"tipo\">Tipo:</label>\r\n            <input type=\"text\" id=\"tipo\" name=\"tipo\" value=\"${Power1:0}\">\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"marca\">Marca:</label>\r\n            <input type=\"text\" id=\"marca\" name=\"marca\" value=\"${MARCA}\">\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"modelo\">Modelo:</label>\r\n            <input type=\"text\" id=\"modelo\" name=\"modelo\" value=\"${MODELO:0}\">\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"tipoWO\">Tipo WO:</label>\r\n            <select id=\"tipoWO\" name=\"tipoWO\">\r\n                <option value=\"\">Seleccione el tipo de WO</option>\r\n                <option value=\"NC\">NC</option>\r\n                <option value=\"PMB\">PM: B</option>\r\n                <option value=\"PMD\">PM: D</option>\r\n                <option value=\"UNSCH\">UNSCH</option>\r\n            </select>\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"reporteFalla\">Reporte Falla:</label>\r\n            <input type=\"text\" id=\"reporteFalla\" name=\"reporteFalla\">\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"fechaWO\">Fecha WO:</label>\r\n            <input type=\"date\" id=\"fechaWO\" name=\"fechaWO\">\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"diasEnTaller\">Días En Taller:</label>\r\n            <input type=\"text\" id=\"diasEnTaller\" name=\"diasEnTaller\" readonly>\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"etr\">ETR:</label>\r\n            <select id=\"etr\" name=\"etr\">\r\n                <option value=\"\">Seleccione el tipo de ETR</option>\r\n                <option value=\"En Busqueda y Cotización\">En Busqueda y Cotización</option>\r\n                <option value=\"En Cotización\">En Cotización</option>\r\n                <option value=\"En Diagnostico\">En Diagnostico</option>\r\n                <option value=\"En Importación\">En Importación</option>\r\n                <option value=\"En Solicitud / Cotización\">En Solicitud / Cotización</option>\r\n                <option value=\"Pendiente Autorización\">Pendiente Autorización</option>\r\n                <option value=\"Pendiente Diagnostico\">Pendiente Diagnostico</option>\r\n                <option value=\"Por Autorización\">Por Autorización</option>\r\n                <option value=\"SIN ETR\">SIN ETR</option>\r\n            </select>\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"observaciones\">Observaciones:</label>\r\n            <textarea id=\"observaciones\" name=\"observaciones\" rows=\"4\"></textarea>\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"posicion\">Posición:</label>\r\n            <input type=\"text\" id=\"posicion\" name=\"posicion\">\r\n        </div>\r\n        \r\n        <div>\r\n            <button type=\"button\" id=\"backButton\">Volver</button>\r\n            <button type=\"button\" id=\"saveButton\">Guardar</button>\r\n        </div>\r\n    </form>\r\n\r\n    <script>\r\n        document.addEventListener('DOMContentLoaded', function() {\r\n            // Referencias a elementos del formulario\r\n            const fechaWOInput = document.getElementById('fechaWO');\r\n            const diasEnTallerInput = document.getElementById('diasEnTaller');\r\n            \r\n            // Establecer la fecha actual como valor predeterminado para fechaWO\r\n            const today = new Date();\r\n            const formattedDate = today.toISOString().substr(0, 10);\r\n            fechaWOInput.value = formattedDate;\r\n            \r\n            // Calcular días en taller inicialmente\r\n            calcularDiasEnTaller();\r\n            \r\n            // Calcular días en taller cuando cambia la fecha WO\r\n            fechaWOInput.addEventListener('change', calcularDiasEnTaller);\r\n            \r\n            function calcularDiasEnTaller() {\r\n                if (fechaWOInput.value) {\r\n                    const fechaWO = new Date(fechaWOInput.value);\r\n                    const hoy = new Date();\r\n                    const diferencia = Math.floor((hoy - fechaWO) / (1000 * 60 * 60 * 24));\r\n                    diasEnTallerInput.value = diferencia;\r\n                } else {\r\n                    diasEnTallerInput.value = '';\r\n                }\r\n            }\r\n            \r\n            // El botón de volver puede tener una acción simple\r\n            const backButton = document.getElementById('backButton');\r\n            backButton.addEventListener('click', function() {\r\n                console.log(\"Volviendo a la página anterior...\");\r\n                // Puedes dejar esto vacío o implementar una navegación básica\r\n                // history.back();\r\n            });\r\n            \r\n            // No incluimos la acción del botón guardar aquí ya que se configurará en ThingsBoard\r\n        });\r\n    </script>\r\n</body>\r\n</html>\r\n",
+              "cardCss" : "/* Estilos generales */\r\nbody {\r\n  font-family: \"Roboto\", \"Segoe UI\", Arial, sans-serif;\r\n  background-color: #f8f9fa;\r\n  color: #2c3e50;\r\n  margin: 0;\r\n  padding: 8px;\r\n  line-height: 1.3;\r\n  font-size: 13px;\r\n  min-height: 100vh;\r\n}\r\n\r\n/* Contenedor principal con scroll forzado */\r\n#maintenanceForm {\r\n  background-color: white;\r\n  border-radius: 6px;\r\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);\r\n  padding: 12px 12px 120px 12px;\r\n  max-width: 1000px;\r\n  height: 85vh;\r\n  max-height: 85vh;\r\n  min-height: 500px;\r\n  margin: 0 auto;\r\n  transition: all 0.3s ease;\r\n  border-top: 3px solid #ff6900;\r\n  display: grid;\r\n  grid-template-columns: repeat(2, 1fr);\r\n  gap: 4px;\r\n  overflow-y: scroll;\r\n  overflow-x: hidden;\r\n  box-sizing: border-box;\r\n}\r\n\r\n#maintenanceForm:hover {\r\n  box-shadow: 0 6px 20px rgba(255, 105, 0, 0.12);\r\n}\r\n\r\n/* Scrollbar personalizado más visible */\r\n#maintenanceForm::-webkit-scrollbar {\r\n  width: 10px;\r\n}\r\n\r\n#maintenanceForm::-webkit-scrollbar-track {\r\n  background: #f1f1f1;\r\n  border-radius: 5px;\r\n}\r\n\r\n#maintenanceForm::-webkit-scrollbar-thumb {\r\n  background: #ff6900;\r\n  border-radius: 5px;\r\n  border: 1px solid #f1f1f1;\r\n}\r\n\r\n#maintenanceForm::-webkit-scrollbar-thumb:hover {\r\n  background: #e55a00;\r\n}\r\n\r\n/* Para Firefox - scrollbar siempre visible */\r\n#maintenanceForm {\r\n  scrollbar-width: auto;\r\n  scrollbar-color: #ff6900 #f1f1f1;\r\n}\r\n\r\n/* Campos del formulario */\r\n#maintenanceForm > div {\r\n  margin-bottom: 4px;\r\n  display: flex;\r\n  align-items: center;\r\n  padding: 2px;\r\n  border-radius: 4px;\r\n  transition: background-color 0.2s ease;\r\n  min-height: 32px;\r\n}\r\n\r\n#maintenanceForm > div:hover {\r\n  background-color: rgba(255, 105, 0, 0.02);\r\n}\r\n\r\n/* Contenedor de botones con mucho más espacio */\r\n#maintenanceForm > div:last-child {\r\n  grid-column: 1 / -1;\r\n  background-color: white !important;\r\n  margin-top: 20px;\r\n  margin-bottom: 40px;\r\n  padding: 20px 0 40px 0;\r\n  border-top: 2px solid #f1f3f4;\r\n  justify-content: center;\r\n  display: flex;\r\n  gap: 12px;\r\n  position: relative;\r\n  z-index: 10;\r\n  min-height: 80px;\r\n}\r\n\r\n/* Etiquetas */\r\nlabel {\r\n  display: block;\r\n  font-weight: 600;\r\n  color: #34495e;\r\n  width: 110px;\r\n  padding-right: 8px;\r\n  text-align: right;\r\n  flex-shrink: 0;\r\n  transition: all 0.2s ease;\r\n  font-size: 12px;\r\n}\r\n\r\n#maintenanceForm > div:hover label {\r\n  color: #ff6900;\r\n}\r\n\r\n/* Inputs, selects y textarea */\r\ninput,\r\nselect,\r\ntextarea {\r\n  flex: 1;\r\n  padding: 6px 8px;\r\n  border: 1px solid #e1e8ed;\r\n  border-radius: 4px;\r\n  font-size: 12px;\r\n  background-color: #fff;\r\n  transition: all 0.2s ease;\r\n  font-family: inherit;\r\n  height: 28px;\r\n  box-sizing: border-box;\r\n}\r\n\r\n/* Textarea específico */\r\ntextarea {\r\n  height: 50px !important;\r\n  min-height: 50px;\r\n  max-height: 80px;\r\n  resize: vertical;\r\n  padding-top: 6px;\r\n}\r\n\r\ninput:hover,\r\nselect:hover,\r\ntextarea:hover {\r\n  border-color: #ff8533;\r\n  box-shadow: 0 1px 4px rgba(255, 105, 0, 0.1);\r\n}\r\n\r\ninput:focus,\r\nselect:focus,\r\ntextarea:focus {\r\n  outline: none;\r\n  border-color: #ff6900;\r\n  box-shadow: 0 0 0 2px rgba(255, 105, 0, 0.15);\r\n  background-color: #fffbf8;\r\n}\r\n\r\n/* Campos de solo lectura */\r\ninput[readonly] {\r\n  background-color: #f8f9fa;\r\n  border-color: #dee2e6;\r\n  color: #6c757d;\r\n  cursor: not-allowed;\r\n}\r\n\r\ninput[readonly]:hover {\r\n  border-color: #dee2e6;\r\n  box-shadow: none;\r\n}\r\n\r\n/* Botones más visibles */\r\nbutton {\r\n  padding: 8px 20px;\r\n  border: none;\r\n  border-radius: 4px;\r\n  font-size: 13px;\r\n  font-weight: 600;\r\n  cursor: pointer;\r\n  transition: all 0.2s ease;\r\n  margin-right: 8px;\r\n  position: relative;\r\n  overflow: hidden;\r\n  text-transform: uppercase;\r\n  letter-spacing: 0.3px;\r\n  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);\r\n  height: 40px;\r\n  min-width: 120px;\r\n}\r\n\r\nbutton::after {\r\n  content: \"\";\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 5px;\r\n  height: 5px;\r\n  background: rgba(255, 255, 255, 0.6);\r\n  opacity: 0;\r\n  border-radius: 100%;\r\n  transform: scale(1, 1) translate(-50%);\r\n  transform-origin: 50% 50%;\r\n}\r\n\r\nbutton:focus:not(:active)::after {\r\n  animation: ripple 0.4s ease-out;\r\n}\r\n\r\n@keyframes ripple {\r\n  0% {\r\n    transform: scale(0, 0);\r\n    opacity: 0.6;\r\n  }\r\n  100% {\r\n    transform: scale(20, 20);\r\n    opacity: 0;\r\n  }\r\n}\r\n\r\n#saveButton {\r\n  background: linear-gradient(135deg, #ff6900, #ff8533);\r\n  color: white;\r\n  box-shadow: 0 3px 8px rgba(255, 105, 0, 0.3);\r\n}\r\n\r\n#saveButton:hover {\r\n  background: linear-gradient(135deg, #e55a00, #ff6900);\r\n  transform: translateY(-2px);\r\n  box-shadow: 0 5px 12px rgba(255, 105, 0, 0.4);\r\n}\r\n\r\n#saveButton:active {\r\n  transform: translateY(0);\r\n  box-shadow: 0 3px 6px rgba(255, 105, 0, 0.3);\r\n}\r\n\r\n#backButton {\r\n  background: linear-gradient(135deg, #6c757d, #868e96);\r\n  color: white;\r\n  box-shadow: 0 3px 8px rgba(108, 117, 125, 0.3);\r\n}\r\n\r\n#backButton:hover {\r\n  background: linear-gradient(135deg, #5a6268, #6c757d);\r\n  transform: translateY(-2px);\r\n  box-shadow: 0 5px 12px rgba(108, 117, 125, 0.4);\r\n}\r\n\r\n#backButton:active {\r\n  transform: translateY(0);\r\n  box-shadow: 0 3px 6px rgba(108, 117, 125, 0.3);\r\n}\r\n\r\n/* Estilos para los selects de condición */\r\n#condicion option[value=\"1\"] {\r\n  background-color: rgba(40, 167, 69, 0.1);\r\n  color: #28a745;\r\n}\r\n\r\n#condicion option[value=\"2\"] {\r\n  background-color: rgba(255, 193, 7, 0.1);\r\n  color: #ffc107;\r\n}\r\n\r\n#condicion option[value=\"3\"] {\r\n  background-color: rgba(220, 53, 69, 0.1);\r\n  color: #dc3545;\r\n}\r\n\r\n/* Animación para los campos al cargar */\r\n#maintenanceForm > div {\r\n  animation: slideIn 0.3s ease-out forwards;\r\n  opacity: 0;\r\n  transform: translateY(8px);\r\n}\r\n\r\n@keyframes slideIn {\r\n  to {\r\n    opacity: 1;\r\n    transform: translateY(0);\r\n  }\r\n}\r\n\r\n/* Aplicar animación respetando el orden del HTML */\r\n#maintenanceForm > div:nth-child(1) {\r\n  animation-delay: 0.05s;\r\n}\r\n#maintenanceForm > div:nth-child(2) {\r\n  animation-delay: 0.08s;\r\n}\r\n#maintenanceForm > div:nth-child(3) {\r\n  animation-delay: 0.11s;\r\n}\r\n#maintenanceForm > div:nth-child(4) {\r\n  animation-delay: 0.14s;\r\n}\r\n#maintenanceForm > div:nth-child(5) {\r\n  animation-delay: 0.17s;\r\n}\r\n#maintenanceForm > div:nth-child(6) {\r\n  animation-delay: 0.2s;\r\n}\r\n#maintenanceForm > div:nth-child(7) {\r\n  animation-delay: 0.23s;\r\n}\r\n#maintenanceForm > div:nth-child(8) {\r\n  animation-delay: 0.26s;\r\n}\r\n#maintenanceForm > div:nth-child(9) {\r\n  animation-delay: 0.29s;\r\n}\r\n#maintenanceForm > div:nth-child(10) {\r\n  animation-delay: 0.32s;\r\n}\r\n#maintenanceForm > div:nth-child(11) {\r\n  animation-delay: 0.35s;\r\n}\r\n#maintenanceForm > div:nth-child(12) {\r\n  animation-delay: 0.38s;\r\n}\r\n#maintenanceForm > div:nth-child(13) {\r\n  animation-delay: 0.41s;\r\n}\r\n#maintenanceForm > div:nth-child(14) {\r\n  animation-delay: 0.44s;\r\n}\r\n#maintenanceForm > div:nth-child(15) {\r\n  animation-delay: 0.47s;\r\n}\r\n#maintenanceForm > div:nth-child(16) {\r\n  animation-delay: 0.5s;\r\n}\r\n\r\n/* Responsive */\r\n@media (max-width: 768px) {\r\n  #maintenanceForm {\r\n    display: block;\r\n    padding: 10px 10px 140px 10px;\r\n    margin: 5px;\r\n    height: 90vh;\r\n    max-height: 90vh;\r\n  }\r\n\r\n  label {\r\n    width: 100%;\r\n    text-align: left;\r\n    margin-bottom: 3px;\r\n    font-weight: 600;\r\n  }\r\n\r\n  #maintenanceForm > div {\r\n    flex-direction: column;\r\n    align-items: flex-start;\r\n    margin-bottom: 8px;\r\n    min-height: auto;\r\n  }\r\n\r\n  input,\r\n  select,\r\n  textarea {\r\n    width: 100%;\r\n    box-sizing: border-box;\r\n  }\r\n\r\n  textarea {\r\n    height: 40px !important;\r\n    min-height: 40px;\r\n  }\r\n\r\n  /* Botones en móvil - HORIZONTAL para que se vean ambos */\r\n  #maintenanceForm > div:last-child {\r\n    flex-direction: row;\r\n    justify-content: center;\r\n    gap: 12px;\r\n    border-top: 2px solid #e1e8ed;\r\n    padding: 25px 0 50px 0;\r\n    margin: 25px 0 50px 0;\r\n    background-color: white !important;\r\n    min-height: 100px;\r\n  }\r\n\r\n  button {\r\n    flex: 1;\r\n    margin: 0;\r\n    padding: 12px 16px;\r\n    height: 44px;\r\n    max-width: 150px;\r\n  }\r\n}\r\n\r\n/* Para pantallas muy pequeñas - MANTENER HORIZONTAL */\r\n@media (max-width: 480px) {\r\n  body {\r\n    padding: 3px;\r\n  }\r\n\r\n  #maintenanceForm {\r\n    padding: 8px 8px 160px 8px;\r\n    height: 95vh;\r\n    max-height: 95vh;\r\n  }\r\n\r\n  #maintenanceForm > div:last-child {\r\n    flex-direction: row;\r\n    gap: 8px;\r\n    padding: 30px 0 60px 0;\r\n    margin: 30px 0 60px 0;\r\n    min-height: 120px;\r\n  }\r\n\r\n  button {\r\n    width: 45%;\r\n    margin: 0;\r\n    padding: 14px 12px;\r\n    height: 48px;\r\n    font-size: 11px;\r\n  }\r\n\r\n  #backButton {\r\n    order: 0;\r\n  }\r\n\r\n  #saveButton {\r\n    order: 1;\r\n  }\r\n}\r\n\r\n/* Mejoras adicionales para accesibilidad */\r\nbutton:focus-visible {\r\n  outline: 2px solid rgba(255, 105, 0, 0.5);\r\n  outline-offset: 1px;\r\n}\r\n\r\ninput:focus-visible,\r\nselect:focus-visible,\r\ntextarea:focus-visible {\r\n  outline: 1px solid #ff6900;\r\n  outline-offset: 1px;\r\n}\r\n\r\n/* Estados de validación compactos */\r\n.field-error input,\r\n.field-error select,\r\n.field-error textarea {\r\n  border-color: #dc3545;\r\n  box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.15);\r\n}\r\n\r\n.field-success input,\r\n.field-success select,\r\n.field-success textarea {\r\n  border-color: #28a745;\r\n  box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.15);\r\n}\r\n"
+            },
+            "title" : "Formulario Entradas MTTO",
+            "dropShadow" : false,
+            "enableFullscreen" : false,
+            "widgetStyle" : {
+              "border" : "1px solid #0a3d62",
+              "borderRadius" : "8px",
+              "backgroundColor" : "#ffffff",
+              "paddingTop" : "15px",
+              "paddingLeft" : "15px",
+              "paddingRight" : "15px",
+              "paddingBottom" : "50px",
+              "marginTop" : "10px",
+              "marginBottom" : "10px",
+              "marginLeft" : "10px",
+              "marginRight" : "10px",
+              "boxShadow" : "0 4px 12px rgba(10, 61, 98, 0.1)",
+              "fontFamily" : "'Roboto', Arial, sans-serif",
+              "color" : "#333333",
+              "transition" : "all 0.2s ease-in-out",
+              "width" : "calc(100% - 20px)",
+              "boxSizing" : "border-box",
+              "overflow" : "hidden"
+            },
+            "titleStyle" : {
+              "fontSize" : "28px",
+              "fontWeight" : 600,
+              "padding" : "5px 10px 5px 10px"
+            },
+            "useDashboardTimewindow" : true,
+            "showLegend" : false,
+            "actions" : {
+              "elementClick" : [ {
+                "name" : "saveButton",
+                "icon" : "more_horiz",
+                "useShowWidgetActionFunction" : null,
+                "showWidgetActionFunction" : "return true;",
+                "type" : "custom",
+                "customFunction" : "// Obtener los valores de los inputs del formulario de mantenimiento\r\nconst baseElement = document.getElementById(\"base\")\r\nconst equipoElement = document.getElementById(\"equipo\")\r\nconst codElement = document.getElementById(\"cod\")\r\nconst tipoElement = document.getElementById(\"tipo\")\r\nconst marcaElement = document.getElementById(\"marca\")\r\nconst modeloElement = document.getElementById(\"modelo\")\r\nconst condicionElement = document.getElementById(\"condicion\")\r\nconst tipoWOElement = document.getElementById(\"tipoWO\")\r\nconst reporteFailaElement = document.getElementById(\"reporteFalla\")\r\nconst fechaWOElement = document.getElementById(\"fechaWO\")\r\nconst diasEnTallerElement = document.getElementById(\"diasEnTaller\")\r\nconst etrElement = document.getElementById(\"etr\")\r\nconst observacionesElement = document.getElementById(\"observaciones\")\r\nconst posicionElement = document.getElementById(\"posicion\")\r\n\r\n\r\nif (!fechaWOElement || !equipoElement || !tipoWOElement) {\r\n  console.error(\"Alguno de los inputs esenciales no fue encontrado. Verificar HTML.\")\r\n}\r\n\r\n// Obtener los valores de los campos\r\nconst baseValue = baseElement ? baseElement.value.trim() : \"\"\r\nconst equipoValue = equipoElement ? equipoElement.value.trim() : \"\"\r\nconst codValue = codElement ? codElement.value.trim() : \"\"\r\nconst tipoValue = tipoElement ? tipoElement.value.trim() : \"\"\r\nconst marcaValue = marcaElement ? marcaElement.value.trim() : \"\"\r\nconst modeloValue = modeloElement ? modeloElement.value.trim() : \"\"\r\nconst condicionValue = condicionElement ? condicionElement.value.trim() : \"\"\r\nconst tipoWOValue = tipoWOElement ? tipoWOElement.value.trim() : \"\"\r\nconst reporteFailaValue = reporteFailaElement ? reporteFailaElement.value.trim() : \"\"\r\n// Convertir la fecha a timestamp (milisegundos)\r\nconst fechaWOValue = fechaWOElement && fechaWOElement.value ? new Date(fechaWOElement.value).getTime() : Date.now()\r\n// Asegurarse de que diasEnTaller tenga un valor (0 si está vacío)\r\nconst diasEnTallerValue = diasEnTallerElement && diasEnTallerElement.value ? diasEnTallerElement.value.trim() : \"0\"\r\nconst etrValue = etrElement ? etrElement.value.trim() : \"\"\r\nconst observacionesValue = observacionesElement ? observacionesElement.value.trim() : \"\"\r\nconst posicionValue = posicionElement ? posicionElement.value.trim() : \"\"\r\n\r\n// Verificar si los valores esenciales están definidos\r\nif (!tipoWOValue) {\r\n  console.error(\"El tipo de WO está vacío o no definido. No se puede guardar la telemetría.\")\r\n  alert(\"Por favor, seleccione un Tipo de WO antes de guardar.\")\r\n}\r\n\r\n// Mostrar los valores en la consola para depuración\r\nconsole.log(\"Base:\", baseValue)\r\nconsole.log(\"Equipo:\", equipoValue)\r\nconsole.log(\"COD:\", codValue)\r\nconsole.log(\"Tipo:\", tipoValue)\r\nconsole.log(\"Marca:\", marcaValue)\r\nconsole.log(\"Modelo:\", modeloValue)\r\nconsole.log(\"Condición:\", condicionValue)\r\nconsole.log(\"Tipo WO:\", tipoWOValue)\r\nconsole.log(\"Reporte Falla:\", reporteFailaValue)\r\nconsole.log(\"Fecha WO (timestamp):\", fechaWOValue)\r\nconsole.log(\"Días En Taller:\", diasEnTallerValue)\r\nconsole.log(\"ETR:\", etrValue)\r\nconsole.log(\"Observaciones:\", observacionesValue)\r\nconsole.log(\"Posición:\", posicionValue)\r\n\r\n// Crear el objeto valuesHash con los datos que queremos enviar\r\nlet valuesHash = {\r\n  ts_id: fechaWOValue,\r\n  trigger: true,\r\n}\r\n\r\n// Solo agregar valores que no estén vacíos\r\nif (baseValue) valuesHash.mantenimiento_base = baseValue\r\nif (equipoValue) valuesHash.mantenimiento_equipo = equipoValue\r\nif (codValue) valuesHash.mantenimiento_cod = codValue\r\nif (tipoValue) valuesHash.mantenimiento_tipo = tipoValue\r\nif (marcaValue) valuesHash.mantenimiento_marca = marcaValue\r\nif (modeloValue) valuesHash.mantenimiento_modelo = modeloValue\r\nif (condicionValue && !isNaN(Number.parseInt(condicionValue))) valuesHash.condicion = Number.parseInt(condicionValue)\r\nif (tipoWOValue) valuesHash.mantenimiento_tipo_wo = tipoWOValue\r\nif (reporteFailaValue) valuesHash.mantenimiento_reporte_falla = reporteFailaValue\r\nvaluesHash.mantenimiento_fecha_wo = fechaWOValue // Este siempre se incluye\r\nif (diasEnTallerValue && !isNaN(Number.parseInt(diasEnTallerValue)))\r\n  valuesHash.mantenimiento_dias_en_taller = Number.parseInt(diasEnTallerValue)\r\nif (etrValue) valuesHash.mantenimiento_etr = etrValue\r\nif (observacionesValue) valuesHash.mantenimiento_observaciones = observacionesValue\r\nif (posicionValue) valuesHash.mantenimiento_posicion = posicionValue\r\n\r\nconsole.log(\"Objeto valuesHash creado:\", valuesHash)\r\n\r\n// Asegurarse de que al menos tengamos los campos mínimos necesarios\r\nif (!valuesHash.mantenimiento_equipo || !valuesHash.mantenimiento_tipo_wo) {\r\n  console.error(\"Faltan campos obligatorios. No se puede guardar la telemetría.\")\r\n  alert(\"Por favor, complete al menos el Equipo y el Tipo de WO antes de guardar.\")\r\n}\r\n\r\nlet telemetryHashArray = [\r\n  { key: \"ts\", value: fechaWOValue },\r\n  { key: \"values\", value: valuesHash },\r\n]\r\n\r\nconsole.log(\"Estructura telemetryHashArray creada:\", telemetryHashArray)\r\n\r\n// Obtener el servicio de atributos para guardar la telemetría\r\ntry {\r\n  let $injector = widgetContext.$scope.$injector\r\n  let attributeService = $injector.get(widgetContext.servicesMap.get(\"attributeService\"))\r\n\r\n  if (!attributeService) {\r\n    throw new Error(\"El servicio attributeService no fue encontrado\")\r\n  }\r\n\r\n  console.log(\"attributeService encontrado:\", attributeService)\r\n\r\n  // Mostrar indicador de carga\r\n  const saveButton = document.getElementById(\"saveButton\")\r\n  if (saveButton) {\r\n    saveButton.disabled = true\r\n    saveButton.textContent = \"Guardando...\"\r\n  }\r\n\r\n  // Guardar la telemetría\r\n  attributeService.saveEntityTimeseries(entityId, \"ANY\", telemetryHashArray).subscribe(\r\n    function () {\r\n      console.log(\"Telemetría guardada correctamente\")\r\n      alert(\"Datos de mantenimiento guardados correctamente\")\r\n\r\n      // Restablecer el botón\r\n      if (saveButton) {\r\n        saveButton.disabled = false\r\n        saveButton.textContent = \"Guardar\"\r\n      }\r\n\r\n      setTimeout(() => {\r\n        console.log(\"Actualizando aliases del widget...\")\r\n        widgetContext.updateAliases()\r\n      }, 2000)\r\n    },\r\n    function (error) {\r\n      console.error(\"Error al guardar la telemetría:\", error)\r\n      alert(\"Error al guardar los datos de mantenimiento: \" + (error.message || \"Error desconocido\"))\r\n\r\n      // Restablecer el botón\r\n      if (saveButton) {\r\n        saveButton.disabled = false\r\n        saveButton.textContent = \"Guardar\"\r\n      }\r\n    },\r\n  )\r\n} catch (e) {\r\n  console.error(\"Error al intentar guardar la telemetría:\", e)\r\n  alert(\"Error al intentar guardar: \" + e.message)\r\n}",
+                "openInSeparateDialog" : false,
+                "openInPopover" : false,
+                "id" : "917fa9ec-30cc-c146-8ca8-f700f7ba74a1"
+              }, {
+                "name" : "backButton",
+                "icon" : "more_horiz",
+                "useShowWidgetActionFunction" : null,
+                "showWidgetActionFunction" : "return true;",
+                "type" : "updateDashboardState",
+                "targetDashboardStateId" : "historico_global",
+                "setEntityId" : true,
+                "stateEntityParamName" : null,
+                "openRightLayout" : false,
+                "openInSeparateDialog" : false,
+                "openInPopover" : false,
+                "id" : "b616a30f-f9f5-6d91-5c58-8e708fbf0376"
+              } ],
+              "headerButton" : [ ]
+            },
+            "enableDataExport" : false,
+            "widgetCss" : "",
+            "pageSize" : 1024,
+            "noDataDisplayMessage" : "",
+            "legendConfig" : {
+              "direction" : "column",
+              "position" : "bottom",
+              "sortDataKeys" : false,
+              "showMin" : false,
+              "showMax" : false,
+              "showAvg" : false,
+              "showTotal" : true,
+              "showLatest" : false
+            },
+            "showTitleIcon" : false,
+            "titleTooltip" : "",
+            "titleIcon" : "list",
+            "iconColor" : "#FF6900",
+            "iconSize" : "24px"
+          },
+          "row" : 0,
+          "col" : 0,
+          "id" : "07941c70-a0dc-c833-55c6-df4012e5f3f2"
+        },
+        "ad5548a9-af3c-041d-285f-c87a523a4ccb" : {
+          "isSystemType" : true,
+          "bundleAlias" : "input_widgets",
+          "typeAlias" : "update_multiple_attributes",
+          "type" : "latest",
+          "title" : "New widget",
+          "image" : null,
+          "description" : null,
+          "sizeX" : 7.5,
+          "sizeY" : 3,
+          "config" : {
+            "datasources" : [ {
+              "type" : "entity",
+              "name" : null,
+              "entityAliasId" : "298dab6b-fd56-d92b-b098-860aa22a5e90",
+              "filterId" : "4f37dc61-108f-90e3-99c0-e0440249dbd3",
+              "dataKeys" : [ {
+                "name" : "VehicleType",
+                "type" : "attribute",
+                "label" : "Tipo de Vehículo",
+                "color" : "#4caf50",
+                "settings" : {
+                  "dataKeyHidden" : false,
+                  "dataKeyType" : "server",
+                  "dataKeyValueType" : "string",
+                  "required" : false,
+                  "isEditable" : "disabled",
+                  "useCustomIcon" : false,
+                  "useGetValueFunction" : false,
+                  "useSetValueFunction" : false
+                },
+                "_hash" : 0.25641851156772266,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              }, {
+                "name" : "Power1",
+                "type" : "attribute",
+                "label" : "Tipo de Combustible",
+                "color" : "#4caf50",
+                "settings" : {
+                  "dataKeyHidden" : false,
+                  "dataKeyType" : "server",
+                  "dataKeyValueType" : "select",
+                  "required" : false,
+                  "isEditable" : "editable",
+                  "selectOptions" : [ {
+                    "value" : "DIESEL",
+                    "label" : "🚜 Diesel"
+                  }, {
+                    "value" : "PETROL-GASOLINE",
+                    "label" : "⛽️ Gasolina"
+                  }, {
+                    "value" : "electrico",
+                    "label" : "⚡ Eléctrico"
+                  }, {
+                    "value" : "etanol",
+                    "label" : "🌱 Etanol"
+                  }, {
+                    "value" : "GLP",
+                    "label" : "🔥 GLP (Gas Licuado de Petróleo)"
+                  }, {
+                    "value" : "GNC ",
+                    "label" : " 💨 GNC (Gas Natural Comprimido)"
+                  }, {
+                    "value" : "premium",
+                    "label" : "🌟 Gasolina Premium"
+                  }, {
+                    "value" : "corriente",
+                    "label" : "🚗 Gasolina Regular"
+                  } ],
+                  "useCustomIcon" : false,
+                  "icon" : "dynamic_form",
+                  "useGetValueFunction" : false,
+                  "useSetValueFunction" : false
+                },
+                "_hash" : 0.7148899272577347,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              }, {
+                "name" : "max_fuel_gls",
+                "type" : "attribute",
+                "label" : "Capacidad del Tanque Galones",
+                "color" : "#f44336",
+                "settings" : {
+                  "dataKeyHidden" : false,
+                  "dataKeyType" : "server",
+                  "dataKeyValueType" : "double",
+                  "required" : false,
+                  "isEditable" : "editable",
+                  "step" : 1,
+                  "minValue" : 0,
+                  "maxValue" : 100,
+                  "minValueErrorMessage" : "El tanque no puede ser menor a 1 Galon",
+                  "maxValueErrorMessage" : "El Tanque no puede ser Mayor a 100 Galones",
+                  "useCustomIcon" : false,
+                  "icon" : "archive",
+                  "useGetValueFunction" : false,
+                  "useSetValueFunction" : false
+                },
+                "_hash" : 0.5223691235575505,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              } ],
+              "alarmFilterConfig" : {
+                "statusList" : [ "ACTIVE" ]
+              }
+            } ],
+            "timewindow" : {
+              "displayValue" : "",
+              "selectedTab" : 0,
+              "realtime" : {
+                "realtimeType" : 1,
+                "interval" : 1000,
+                "timewindowMs" : 60000,
+                "quickInterval" : "CURRENT_DAY"
+              },
+              "history" : {
+                "historyType" : 0,
+                "interval" : 1000,
+                "timewindowMs" : 60000,
+                "fixedTimewindow" : {
+                  "startTimeMs" : 1731476412416,
+                  "endTimeMs" : 1731562812416
+                },
+                "quickInterval" : "CURRENT_DAY"
+              },
+              "aggregation" : {
+                "type" : "AVG",
+                "limit" : 25000
+              }
+            },
+            "showTitle" : true,
+            "backgroundColor" : "#fff",
+            "color" : "rgba(0, 0, 0, 0.87)",
+            "padding" : "8px",
+            "settings" : {
+              "showResultMessage" : true,
+              "showActionButtons" : true,
+              "updateAllValues" : false,
+              "saveButtonLabel" : "Guardar Parámetros",
+              "showGroupTitle" : true,
+              "groupTitle" : "${entityName}",
+              "fieldsAlignment" : "row",
+              "fieldsInRow" : 3
+            },
+            "title" : "Configuración de Dispositivos",
+            "dropShadow" : true,
+            "enableFullscreen" : false,
+            "enableDataExport" : false,
+            "widgetStyle" : { },
+            "titleStyle" : {
+              "fontSize" : "16px",
+              "fontWeight" : 400
+            },
+            "useDashboardTimewindow" : true,
+            "showLegend" : false,
+            "actions" : {
+              "headerButton" : [ {
+                "name" : "Atrás",
+                "icon" : "arrow_back",
+                "useShowWidgetActionFunction" : null,
+                "showWidgetActionFunction" : "return true;",
+                "type" : "updateDashboardState",
+                "targetDashboardStateId" : "historico_global",
+                "setEntityId" : true,
+                "stateEntityParamName" : null,
+                "openRightLayout" : false,
+                "openInSeparateDialog" : false,
+                "openInPopover" : false,
+                "id" : "d4bf3828-47df-3ee6-de14-b84bff014622"
+              }, {
+                "name" : "Atras",
+                "icon" : "arrow_back",
+                "useShowWidgetActionFunction" : false,
+                "showWidgetActionFunction" : "return true;",
+                "type" : "openDashboardState",
+                "targetDashboardStateId" : "historico_global",
+                "setEntityId" : true,
+                "stateEntityParamName" : null,
+                "openRightLayout" : false,
+                "openInSeparateDialog" : false,
+                "openInPopover" : false,
+                "id" : "a3f7ff2a-9b58-8d81-b4a1-4ae1c6250dc2"
+              } ]
+            },
+            "showTitleIcon" : true,
+            "titleTooltip" : "",
+            "widgetCss" : "",
+            "pageSize" : 1024,
+            "noDataDisplayMessage" : "",
+            "titleIcon" : "settings",
+            "iconColor" : "rgba(0, 0, 0, 0.87)",
+            "iconSize" : "24px"
+          },
+          "row" : 0,
+          "col" : 0,
+          "id" : "ad5548a9-af3c-041d-285f-c87a523a4ccb"
+        },
+        "2367c1ae-94fc-cfd0-83a4-9f07b4249204" : {
+          "isSystemType" : true,
+          "bundleAlias" : "cards",
+          "typeAlias" : "timeseries_table",
+          "type" : "timeseries",
+          "title" : "New widget",
+          "image" : null,
+          "description" : null,
+          "sizeX" : 8,
+          "sizeY" : 6.5,
+          "config" : {
+            "datasources" : [ {
+              "type" : "entity",
+              "name" : null,
+              "entityAliasId" : "e97a12a6-61e6-6865-0b74-9ebb843fbf9e",
+              "filterId" : null,
+              "dataKeys" : [ {
+                "name" : "originatorName",
+                "type" : "timeseries",
+                "label" : "Nombre",
+                "color" : "#4caf50",
+                "settings" : { },
+                "_hash" : 0.10345855753383737,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              }, {
+                "name" : "fuelType",
+                "type" : "timeseries",
+                "label" : "Combustible",
+                "color" : "#9c27b0",
+                "settings" : { },
+                "_hash" : 0.6952841575699773,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              }, {
+                "name" : "numero_vale",
+                "type" : "timeseries",
+                "label" : "numero_vale",
+                "color" : "#3f51b5",
+                "settings" : { },
+                "_hash" : 0.8165342512440867
+              }, {
+                "name" : "horometro",
+                "type" : "timeseries",
+                "label" : "Horómetro",
+                "color" : "#2196f3",
+                "settings" : { },
+                "_hash" : 0.6124397602898466,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              }, {
+                "name" : "quien_tanquea",
+                "type" : "timeseries",
+                "label" : "Quién Tanquea",
+                "color" : "#9c27b0",
+                "settings" : { },
+                "_hash" : 0.10892271338648407,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              }, {
+                "name" : "marcador_desde",
+                "type" : "timeseries",
+                "label" : "marcador_desde",
+                "color" : "#9c27b0",
+                "settings" : { },
+                "_hash" : 0.8348399210221802
+              }, {
+                "name" : "marcador_hasta",
+                "type" : "timeseries",
+                "label" : "marcador_hasta",
+                "color" : "#8bc34a",
+                "settings" : { },
+                "_hash" : 0.7661803941410044
+              }, {
+                "name" : "usuario_modifico",
+                "type" : "timeseries",
+                "label" : "usuario_modifico",
+                "color" : "#e91e63",
+                "settings" : { },
+                "_hash" : 0.058347669327061036
+              }, {
+                "name" : "galones_suministrados",
+                "type" : "timeseries",
+                "label" : "Galones",
+                "color" : "#f44336",
+                "settings" : { },
+                "_hash" : 0.22759259345255334,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : 2,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              } ],
+              "alarmFilterConfig" : {
+                "statusList" : [ "ACTIVE" ]
+              },
+              "latestDataKeys" : [ ]
+            } ],
+            "timewindow" : {
+              "hideInterval" : false,
+              "hideLastInterval" : false,
+              "hideQuickInterval" : false,
+              "hideAggregation" : false,
+              "hideAggInterval" : false,
+              "hideTimezone" : false,
+              "selectedTab" : 0,
+              "realtime" : {
+                "realtimeType" : 1,
+                "timewindowMs" : 60000,
+                "quickInterval" : "CURRENT_YEAR_SO_FAR",
+                "interval" : 1000
+              },
+              "aggregation" : {
+                "type" : "NONE",
+                "limit" : 200
+              },
+              "timezone" : null
+            },
+            "showTitle" : true,
+            "backgroundColor" : "rgb(255, 255, 255)",
+            "color" : "rgba(0, 0, 0, 0.87)",
+            "padding" : "8px",
+            "settings" : {
+              "enableSearch" : true,
+              "enableStickyHeader" : true,
+              "enableStickyAction" : true,
+              "reserveSpaceForHiddenAction" : "true",
+              "showTimestamp" : true,
+              "showMilliseconds" : false,
+              "displayPagination" : false,
+              "useEntityLabel" : false,
+              "hideEmptyLines" : false,
+              "disableStickyHeader" : false,
+              "useRowStyleFunction" : false
+            },
+            "title" : "Tanqueo todos los Equipos",
+            "dropShadow" : true,
+            "enableFullscreen" : true,
+            "titleStyle" : {
+              "fontSize" : "16px",
+              "fontWeight" : 400,
+              "padding" : "5px 10px 5px 10px"
+            },
+            "useDashboardTimewindow" : false,
+            "showLegend" : false,
+            "widgetStyle" : { },
+            "actions" : {
+              "rowClick" : [ ],
+              "actionCellButton" : [ {
+                "name" : "Eliminar Registro",
+                "icon" : "delete",
+                "useShowWidgetActionFunction" : null,
+                "showWidgetActionFunction" : "return true;",
+                "type" : "custom",
+                "customFunction" : "// Función para manejar el clic en la fila de la serie temporal\r\nfunction handleRowClick(additionalParams) {\r\n    // Obtener el timestamp directamente desde los parámetros adicionales\r\n    let timestamp = additionalParams['formattedTs'];\r\n\r\n    if (!timestamp) {\r\n        console.error(\"El valor de 'formattedTs' no está definido. Verifica los parámetros adicionales.\");\r\n        return;\r\n    }\r\n\r\n    // Convertir el timestamp a un valor numérico en milisegundos\r\n    let ts = Date.parse(timestamp.replace(' ', 'T'));\r\n\r\n    if (isNaN(ts)) {\r\n        console.error(\"El valor del timestamp no es válido. Verifica el formato de la fecha:\", timestamp);\r\n        return;\r\n    }\r\n\r\n    console.log(\"Timestamp convertido a milisegundos:\", ts);\r\n\r\n    // Definir el rango del timestamp +/- 5000 ms (5 segundos)\r\n    let startTs = ts - 5000;\r\n    let endTs = ts + 5000;\r\n\r\n    // Intentar actualizar la ventana de tiempo del Dashboard\r\n    updateDashboardTimeWindow(startTs, endTs);\r\n}\r\n\r\n// Función para actualizar la ventana de tiempo del Dashboard\r\nfunction updateDashboardTimeWindow(startTs, endTs) {\r\n    console.log(\"Intentando actualizar la ventana de tiempo a:\", { startTs, endTs });\r\n\r\n    if (widgetContext.timewindowFunctions && typeof widgetContext.timewindowFunctions.onUpdateTimewindow === 'function') {\r\n        try {\r\n            // Usar el método onUpdateTimewindow si existe\r\n            widgetContext.timewindowFunctions.onUpdateTimewindow(startTs, endTs, null);\r\n            console.log(\"Ventana de tiempo actualizada usando onUpdateTimewindow.\");\r\n        } catch (error) {\r\n            console.error(\"Error al intentar actualizar la ventana de tiempo con onUpdateTimewindow:\", error);\r\n        }\r\n    } else {\r\n        console.error(\"No se encontró la función adecuada para actualizar la ventana de tiempo. Verificar el widgetContext.\");\r\n    }\r\n\r\n    // Actualizar alias del widget para reflejar los nuevos datos\r\n    setTimeout(() => {\r\n        console.log(\"Actualizando aliases del widget...\");\r\n        widgetContext.updateAliases();\r\n    }, 500);\r\n}\r\n\r\n// Ejemplo de cómo sería llamado `handleRowClick`\r\n// Esto se debería invocar cuando el usuario haga clic en una fila de la tabla de la serie temporal\r\nhandleRowClick(additionalParams);\r\n\r\nlet choose = confirm('¿Seguro que desea eliminar la Telemetría?');\r\nif (!choose) return;\r\n    \r\nconsole.log('widgetContext',widgetContext);\r\n\r\n// Los datos que están seleccionados para ocultarse en el widget no reflejan arrays en widgetContext.data, sólo los elementos no seleccionados y con telemetrí existente en el rango de tiempo tienen longitud diferente de 0\r\n\r\nlet timeseries = [];\r\n\r\nwidgetContext.data.forEach( dSource => {\r\n    // Toma los data que tienen valores visibles\r\n    if (dSource.data.length > 0){\r\n        // console.log('La tomó : ',dSource.dataKey.name);\r\n        timeseries.push({key:dSource.dataKey.name});\r\n    }\r\n});\r\nlet endTs = Math.floor(widgetContext.timeWindow.maxTime);\r\nlet startTs = Math.floor(widgetContext.timeWindow.minTime);\r\n\r\nconsole.log(entityId, timeseries, false, startTs, endTs);\r\n\r\nwidgetContext.attributeService.deleteEntityTimeseries(entityId, timeseries, false, startTs, endTs).subscribe((res)=>{console.log(res)});\r\n\r\n\r\n// Obtener la fecha y hora actuales en milisegundos\r\nlet now = Date.now();\r\n\r\n// Actualizar la ventana de tiempo del Dashboard\r\nresetDashboardTimeWindow();\r\n\r\nfunction resetDashboardTimeWindow() {\r\n    console.log(\"Intentando restablecer la ventana de tiempo.\");\r\n\r\n    if (widgetContext.timewindowFunctions && typeof widgetContext.timewindowFunctions.onResetTimewindow === 'function') {\r\n        try {\r\n            widgetContext.timewindowFunctions.onResetTimewindow();\r\n            console.log(\"Ventana de tiempo restablecida usando onResetTimewindow.\");\r\n        } catch (error) {\r\n            console.error(\"Error al intentar restablecer la ventana de tiempo:\", error);\r\n        }\r\n    } else {\r\n        console.error(\"No se encontró la función para restablecer la ventana de tiempo.\");\r\n    }\r\n\r\n    setTimeout(() => {\r\n        console.log(\"Actualizando aliases del widget...\");\r\n        widgetContext.updateAliases();\r\n    }, 500);\r\n}",
+                "openInSeparateDialog" : false,
+                "openInPopover" : false,
+                "id" : "7edb773e-d040-8e86-09b8-39a8d33606a5"
+              } ],
+              "headerButton" : [ {
+                "name" : "Atrás",
+                "icon" : "arrow_back",
+                "useShowWidgetActionFunction" : null,
+                "showWidgetActionFunction" : "return true;",
+                "type" : "updateDashboardState",
+                "targetDashboardStateId" : "historico_global",
+                "setEntityId" : true,
+                "stateEntityParamName" : null,
+                "openRightLayout" : false,
+                "openInSeparateDialog" : false,
+                "openInPopover" : false,
+                "id" : "c66ccb4f-8ff8-af8d-81e9-9c47321c1114"
+              } ]
+            },
+            "showTitleIcon" : true,
+            "iconColor" : "rgba(0, 0, 0, 0.87)",
+            "iconSize" : "24px",
+            "displayTimewindow" : false,
+            "titleTooltip" : "",
+            "enableDataExport" : true,
+            "widgetCss" : "",
+            "pageSize" : 1024,
+            "noDataDisplayMessage" : "",
+            "titleIcon" : "ev_station",
+            "legendConfig" : {
+              "direction" : "column",
+              "position" : "bottom",
+              "sortDataKeys" : true,
+              "showMin" : true,
+              "showMax" : true,
+              "showAvg" : true,
+              "showTotal" : true,
+              "showLatest" : true
+            }
+          },
+          "row" : 0,
+          "col" : 0,
+          "id" : "2367c1ae-94fc-cfd0-83a4-9f07b4249204"
+        },
+        "8f33fb77-6938-a758-a343-8873f6f5d480" : {
+          "isSystemType" : true,
+          "bundleAlias" : "charts",
+          "typeAlias" : "basic_timeseries",
+          "type" : "timeseries",
+          "title" : "New widget",
+          "image" : null,
+          "description" : null,
+          "sizeX" : 8,
+          "sizeY" : 5,
+          "config" : {
+            "datasources" : [ {
+              "type" : "entity",
+              "name" : null,
+              "entityAliasId" : "e97a12a6-61e6-6865-0b74-9ebb843fbf9e",
+              "filterId" : null,
+              "dataKeys" : [ {
+                "name" : "galones_suministrados",
+                "type" : "timeseries",
+                "label" : "Galones",
+                "color" : "#FF6500",
+                "settings" : {
+                  "hideDataByDefault" : false,
+                  "disableDataHiding" : false,
+                  "removeFromLegend" : false,
+                  "excludeFromStacking" : false,
+                  "showLines" : true,
+                  "lineWidth" : 1,
+                  "fillLines" : true,
+                  "fillLinesOpacity" : 0.4,
+                  "showPoints" : false,
+                  "showSeparateAxis" : false,
+                  "axisPosition" : "left",
+                  "comparisonSettings" : {
+                    "showValuesForComparison" : true,
+                    "comparisonValuesLabel" : "",
+                    "color" : ""
+                  },
+                  "thresholds" : [ ]
+                },
+                "_hash" : 0.09795741869497365,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              }, {
+                "name" : "originatorName",
+                "type" : "timeseries",
+                "label" : "Equipo",
+                "color" : "#000000",
+                "settings" : {
+                  "hideDataByDefault" : false,
+                  "disableDataHiding" : false,
+                  "removeFromLegend" : true,
+                  "excludeFromStacking" : false,
+                  "showLines" : false,
+                  "showPoints" : false,
+                  "showSeparateAxis" : false,
+                  "axisPosition" : "left",
+                  "comparisonSettings" : {
+                    "showValuesForComparison" : true,
+                    "comparisonValuesLabel" : "",
+                    "color" : ""
+                  },
+                  "thresholds" : [ ]
+                },
+                "_hash" : 0.05939039070462848,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              } ],
+              "alarmFilterConfig" : {
+                "statusList" : [ "ACTIVE" ]
+              },
+              "latestDataKeys" : [ ]
+            } ],
+            "timewindow" : {
+              "realtime" : {
+                "timewindowMs" : 60000
+              }
+            },
+            "showTitle" : true,
+            "backgroundColor" : "#fff",
+            "color" : "rgba(0, 0, 0, 0.87)",
+            "padding" : "8px",
+            "settings" : {
+              "shadowSize" : 4,
+              "fontColor" : "#545454",
+              "fontSize" : 10,
+              "xaxis" : {
+                "showLabels" : true,
+                "color" : "#545454"
+              },
+              "yaxis" : {
+                "showLabels" : true,
+                "color" : "#545454"
+              },
+              "grid" : {
+                "color" : "#545454",
+                "tickColor" : "#DDDDDD",
+                "verticalLines" : true,
+                "horizontalLines" : true,
+                "outlineWidth" : 1
+              },
+              "legend" : {
+                "show" : true,
+                "position" : "nw",
+                "backgroundColor" : "#f0f0f0",
+                "backgroundOpacity" : 0.85,
+                "labelBoxBorderColor" : "rgba(1, 1, 1, 0.45)"
+              },
+              "decimals" : 1,
+              "stack" : false,
+              "tooltipIndividual" : false
+            },
+            "title" : "Tanqueo",
+            "dropShadow" : true,
+            "enableFullscreen" : true,
+            "titleStyle" : {
+              "fontSize" : "16px",
+              "fontWeight" : 400
+            },
+            "useDashboardTimewindow" : true,
+            "showTitleIcon" : false,
+            "titleTooltip" : "",
+            "enableDataExport" : true,
+            "widgetStyle" : { },
+            "widgetCss" : "",
+            "pageSize" : 1024,
+            "noDataDisplayMessage" : "",
+            "showLegend" : true,
+            "legendConfig" : {
+              "direction" : "column",
+              "position" : "bottom",
+              "sortDataKeys" : false,
+              "showMin" : true,
+              "showMax" : true,
+              "showAvg" : true,
+              "showTotal" : true,
+              "showLatest" : true
+            }
+          },
+          "row" : 0,
+          "col" : 0,
+          "id" : "8f33fb77-6938-a758-a343-8873f6f5d480"
+        },
+        "c96a4092-4348-5f8a-6ef7-6d5db01cc178" : {
+          "isSystemType" : true,
+          "bundleAlias" : "cards",
+          "typeAlias" : "entities_table",
+          "type" : "latest",
+          "title" : "New widget",
+          "image" : null,
+          "description" : null,
+          "sizeX" : 7.5,
+          "sizeY" : 6.5,
+          "config" : {
+            "timewindow" : {
+              "displayValue" : "",
+              "selectedTab" : 0,
+              "realtime" : {
+                "realtimeType" : 1,
+                "interval" : 1000,
+                "timewindowMs" : 86400000,
+                "quickInterval" : "CURRENT_DAY"
+              },
+              "history" : {
+                "historyType" : 0,
+                "interval" : 1000,
+                "timewindowMs" : 60000,
+                "fixedTimewindow" : {
+                  "startTimeMs" : 1746241539874,
+                  "endTimeMs" : 1746327939874
+                },
+                "quickInterval" : "CURRENT_DAY"
+              },
+              "aggregation" : {
+                "type" : "NONE",
+                "limit" : 200
+              }
+            },
+            "showTitle" : true,
+            "backgroundColor" : "rgb(255, 255, 255)",
+            "color" : "rgba(0, 0, 0, 0.87)",
+            "padding" : "4px",
+            "settings" : {
+              "entitiesTitle" : "Condición de Equipos",
+              "enableSearch" : true,
+              "enableSelectColumnDisplay" : true,
+              "enableStickyHeader" : true,
+              "enableStickyAction" : true,
+              "reserveSpaceForHiddenAction" : "true",
+              "displayEntityName" : true,
+              "entityNameColumnTitle" : "Nombre",
+              "displayEntityLabel" : false,
+              "displayEntityType" : false,
+              "displayPagination" : true,
+              "defaultPageSize" : 30,
+              "defaultSortOrder" : "entityName",
+              "useRowStyleFunction" : false
+            },
+            "title" : "Condición de Equipos",
+            "dropShadow" : true,
+            "enableFullscreen" : true,
+            "titleStyle" : {
+              "fontSize" : "28px",
+              "fontWeight" : 600,
+              "padding" : "5px 10px 5px 10px"
+            },
+            "useDashboardTimewindow" : false,
+            "showLegend" : false,
+            "datasources" : [ {
+              "type" : "entity",
+              "name" : null,
+              "entityAliasId" : "298dab6b-fd56-d92b-b098-860aa22a5e90",
+              "filterId" : null,
+              "dataKeys" : [ {
+                "name" : "active",
+                "type" : "attribute",
+                "label" : "Estado",
+                "color" : "#8bc34a",
+                "settings" : {
+                  "columnWidth" : "0px",
+                  "useCellStyleFunction" : false,
+                  "useCellContentFunction" : true,
+                  "cellContentFunction" : "  const isConnected = value === true || value === 'true';\r\n  \r\n  const color = isConnected ? '#4CAF50' : '#F44336';\r\n  const statusText = isConnected ? 'Conectado' : 'Desconectado';\r\n  \r\n  const truckSvg = `<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"${color}\">\r\n    <path d=\"M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z\"/>\r\n  </svg>`;\r\n  \r\n  const statusCircle = `<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" viewBox=\"0 0 12 12\">\r\n    <circle cx=\"6\" cy=\"6\" r=\"5\" fill=\"${color}\" />\r\n  </svg>`;\r\n\r\n  return `<div style=\"display: flex; align-items: left; justify-content: left; gap: 8px;\">\r\n            ${truckSvg}\r\n            ${statusCircle}\r\n            <span style=\"font-size: 14px; color: ${color};\">${statusText}</span>\r\n          </div>`;",
+                  "defaultColumnVisibility" : "visible",
+                  "columnSelectionToDisplay" : "enabled",
+                  "columnExportOption" : "onlyVisible"
+                },
+                "_hash" : 0.7377424865320137,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              }, {
+                "name" : "DESCRIPCION",
+                "type" : "attribute",
+                "label" : "DESCRIPCION",
+                "color" : "#3f51b5",
+                "settings" : { },
+                "_hash" : 0.98248855363625
+              }, {
+                "name" : "condicion",
+                "type" : "timeseries",
+                "label" : "Operativo",
+                "color" : "#3f51b5",
+                "settings" : {
+                  "columnWidth" : "0px",
+                  "useCellStyleFunction" : false,
+                  "useCellContentFunction" : true,
+                  "cellContentFunction" : "function getStatusIndicator(value) {\r\n  let emoji = '';\r\n  let backgroundColor = '';\r\n  \r\n  // Determine emoji and background color based on value\r\n  switch (parseInt(value)) {\r\n    case 1:\r\n      emoji = '✔️';\r\n      backgroundColor = 'rgba(0, 200, 0, 0.1)'; // Light green background\r\n      break;\r\n    case 2:\r\n      emoji = '⚠️';\r\n      backgroundColor = 'rgba(255, 200, 0, 0.1)'; // Light yellow background\r\n      break;\r\n    case 3:\r\n      emoji = '❌';\r\n      backgroundColor = 'rgba(255, 0, 0, 0.1)'; // Light red background\r\n      break;\r\n    default:\r\n      emoji = '❓';\r\n      backgroundColor = 'rgba(200, 200, 200, 0.1)'; // Light gray for unknown values\r\n  }\r\n  \r\n  return `<div style=\"display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; min-height: 40px; background-color: ${backgroundColor}; border-radius: 4px;\">\r\n            <span style=\"font-size: 16px; display: flex; align-items: center; gap: 8px;\">\r\n              ${emoji} ${value}\r\n            </span>\r\n          </div>`;\r\n}\r\n\r\n// Uso en la configuración de estilo de celda\r\nvar statusValue = value; // 'value' es lo que recibe la función de estilo de celda\r\nreturn getStatusIndicator(statusValue);",
+                  "defaultColumnVisibility" : "visible",
+                  "columnSelectionToDisplay" : "enabled",
+                  "columnExportOption" : "onlyVisible"
+                },
+                "_hash" : 0.502225903522157,
+                "aggregationType" : "NONE",
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              }, {
+                "name" : "AREA",
+                "type" : "attribute",
+                "label" : "AREA",
+                "color" : "#e91e63",
+                "settings" : { },
+                "_hash" : 0.8193110203578093
+              }, {
+                "name" : "CLASIFICACION",
+                "type" : "attribute",
+                "label" : "CLASIFICACION",
+                "color" : "#ffeb3b",
+                "settings" : { },
+                "_hash" : 0.03484593046238027
+              }, {
+                "name" : "ESTADO",
+                "type" : "attribute",
+                "label" : "ESTADO",
+                "color" : "#03a9f4",
+                "settings" : { },
+                "_hash" : 0.5533126988166135
+              }, {
+                "name" : "MODELO",
+                "type" : "attribute",
+                "label" : "MODELO",
+                "color" : "#8bc34a",
+                "settings" : { },
+                "_hash" : 0.17502876068581075
+              }, {
+                "name" : "SERIE",
+                "type" : "attribute",
+                "label" : "SERIE",
+                "color" : "#3f51b5",
+                "settings" : { },
+                "_hash" : 0.22153098595544263
+              } ],
+              "alarmFilterConfig" : {
+                "statusList" : [ "ACTIVE" ]
+              }
+            } ],
+            "displayTimewindow" : true,
+            "actions" : {
+              "rowClick" : [ {
+                "name" : "cambiarStatusClick",
+                "icon" : "more_horiz",
+                "useShowWidgetActionFunction" : null,
+                "showWidgetActionFunction" : "return true;",
+                "type" : "openDashboardState",
+                "targetDashboardStateId" : "EntradaMTTO",
+                "setEntityId" : true,
+                "stateEntityParamName" : null,
+                "openRightLayout" : false,
+                "openInSeparateDialog" : false,
+                "openInPopover" : false,
+                "id" : "172e6ebe-6d1e-268b-eb1f-345395742199"
+              } ]
+            },
+            "showTitleIcon" : true,
+            "titleTooltip" : "",
+            "enableDataExport" : true,
+            "widgetStyle" : { },
+            "widgetCss" : "/* Add this to your widget's CSS settings */\r\n\r\n/* Subtle hover effect for table rows */\r\n.mat-mdc-row:hover {\r\n  background-color: rgba(0, 120, 212, 0.08) !important; /* Soft blue with low opacity */\r\n  transition: background-color 0.2s ease;\r\n  border-left: 3px solid rgba(0, 120, 212, 0.5) !important;\r\n}\r\n\r\n/* Alternative orange hover effect - uncomment to use this instead */\r\n/*\r\n.mat-mdc-row:hover {\r\n  background-color: rgba(255, 149, 0, 0.08) !important; \r\n  transition: background-color 0.2s ease;\r\n  border-left: 3px solid rgba(255, 149, 0, 0.5) !important;\r\n}\r\n*/\r\n\r\n/* Improve the appearance of cells on hover */\r\n.mat-mdc-row:hover .mat-mdc-cell {\r\n  color: rgba(0, 0, 0, 0.87); /* Slightly darker text on hover */\r\n}\r\n\r\n/* Add a subtle transition effect to all cells */\r\n.mat-mdc-cell {\r\n  transition: all 0.2s ease;\r\n}\r\n\r\n/* Optional: Add a subtle shadow effect on hover */\r\n.mat-mdc-row:hover {\r\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);\r\n  position: relative;\r\n  z-index: 1;\r\n}\r\n\r\n\r\n/* color grisesito del fondo del titulo de las tablas */\r\n.tb-table-widget .mat-mdc-header-row *,\r\n.tb-table-widget thead * {\r\n  background-color: #f5f5f5 !important;\r\n  color: #616161 !important;\r\n}\r\n\r\n/* el borde redondeadoa */\r\n.tb-table-widget {\r\n  border-radius: 8px !important;\r\n  overflow: hidden !important;\r\n}\r\n\r\n/* Estilos para las filas alternadas (como en de all laminatros en el otro widget) */\r\n.mat-mdc-row:nth-child(even) {\r\n  background-color: #fafafa !important;\r\n}\r\n\r\n/* Estilos para el hover en las filas (como en tu CSS) */\r\n.mat-mdc-row:hover {\r\n  background-color: #f5f5f5 !important;\r\n}\r\n\r\n/* Mejora de los bordes de la tabla (como en tu CSS) */\r\n.mdc-data-table__header-row {\r\n  border-bottom: 1px solid #e0e0e0 !important;\r\n}",
+            "pageSize" : 1024,
+            "noDataDisplayMessage" : "",
+            "titleIcon" : "extension",
+            "iconColor" : "#FF690058",
+            "iconSize" : "24px"
+          },
+          "row" : 0,
+          "col" : 0,
+          "id" : "c96a4092-4348-5f8a-6ef7-6d5db01cc178"
+        },
+        "a80f055d-06c9-caac-ef2c-596c3ada2739" : {
+          "isSystemType" : true,
+          "bundleAlias" : "cards",
+          "typeAlias" : "html_value_card",
+          "type" : "latest",
+          "title" : "New widget",
+          "image" : null,
+          "description" : null,
+          "sizeX" : 7.5,
+          "sizeY" : 3,
+          "config" : {
+            "datasources" : [ {
+              "type" : "entity",
+              "name" : null,
+              "entityAliasId" : "09b60ead-b402-fee5-5236-785ecac4f1ec",
+              "filterId" : null,
+              "dataKeys" : [ {
+                "name" : "mantenimiento_base",
+                "type" : "attribute",
+                "label" : "mantenimiento_base",
+                "color" : "#4caf50",
+                "settings" : { },
+                "_hash" : 0.39301695453606844
+              }, {
+                "name" : "mantenimiento_equipo",
+                "type" : "attribute",
+                "label" : "mantenimiento_equipo",
+                "color" : "#f44336",
+                "settings" : { },
+                "_hash" : 0.3120611099332007
+              }, {
+                "name" : "mantenimiento_cod",
+                "type" : "attribute",
+                "label" : "mantenimiento_cod",
+                "color" : "#ffc107",
+                "settings" : { },
+                "_hash" : 0.8198742841426327
+              }, {
+                "name" : "mantenimiento_marca",
+                "type" : "attribute",
+                "label" : "mantenimiento_marca",
+                "color" : "#9c27b0",
+                "settings" : { },
+                "_hash" : 0.42573760942343997
+              }, {
+                "name" : "mantenimiento_modelo",
+                "type" : "attribute",
+                "label" : "mantenimiento_modelo",
+                "color" : "#8bc34a",
+                "settings" : { },
+                "_hash" : 0.887924652661797
+              }, {
+                "name" : "mantenimiento_tipo_wo",
+                "type" : "attribute",
+                "label" : "mantenimiento_tipo_wo",
+                "color" : "#3f51b5",
+                "settings" : { },
+                "_hash" : 0.765323436059355
+              }, {
+                "name" : "mantenimiento_reporte_falla",
+                "type" : "attribute",
+                "label" : "mantenimiento_reporte_falla",
+                "color" : "#e91e63",
+                "settings" : { },
+                "_hash" : 0.8623113615381377
+              }, {
+                "name" : "mantenimiento_fecha_wo",
+                "type" : "attribute",
+                "label" : "mantenimiento_fecha_wo",
+                "color" : "#ffeb3b",
+                "settings" : { },
+                "_hash" : 0.4772640937037951
+              }, {
+                "name" : "mantenimiento_dias_en_taller",
+                "type" : "attribute",
+                "label" : "mantenimiento_dias_en_taller",
+                "color" : "#03a9f4",
+                "settings" : { },
+                "_hash" : 0.18626863195557974
+              }, {
+                "name" : "mantenimiento_etr",
+                "type" : "attribute",
+                "label" : "mantenimiento_etr",
+                "color" : "#ff9800",
+                "settings" : { },
+                "_hash" : 0.9081514766403445
+              }, {
+                "name" : "mantenimiento_observaciones",
+                "type" : "attribute",
+                "label" : "mantenimiento_observaciones",
+                "color" : "#673ab7",
+                "settings" : { },
+                "_hash" : 0.039882994210459266
+              }, {
+                "name" : "mantenimiento_posicion",
+                "type" : "attribute",
+                "label" : "mantenimiento_posicion",
+                "color" : "#cddc39",
+                "settings" : { },
+                "_hash" : 0.7249845693909225
+              }, {
+                "name" : "condicion",
+                "type" : "attribute",
+                "label" : "condicion",
+                "color" : "#cddc39",
+                "settings" : { },
+                "_hash" : 0.10977727036352536
+              }, {
+                "name" : "ts_id",
+                "type" : "attribute",
+                "label" : "ts_id",
+                "color" : "#009688",
+                "settings" : { },
+                "_hash" : 0.8111847192639805,
+                "aggregationType" : null,
+                "units" : null,
+                "decimals" : null,
+                "funcBody" : null,
+                "usePostProcessing" : null,
+                "postFuncBody" : null
+              } ],
+              "alarmFilterConfig" : {
+                "statusList" : [ "ACTIVE" ]
+              }
+            } ],
+            "timewindow" : {
+              "displayValue" : "",
+              "selectedTab" : 0,
+              "realtime" : {
+                "realtimeType" : 1,
+                "interval" : 1000,
+                "timewindowMs" : 60000,
+                "quickInterval" : "CURRENT_DAY"
+              },
+              "history" : {
+                "historyType" : 0,
+                "interval" : 1000,
+                "timewindowMs" : 60000,
+                "fixedTimewindow" : {
+                  "startTimeMs" : 1729398693804,
+                  "endTimeMs" : 1729485093804
+                },
+                "quickInterval" : "CURRENT_DAY"
+              },
+              "aggregation" : {
+                "type" : "AVG",
+                "limit" : 25000
+              }
+            },
+            "showTitle" : true,
+            "backgroundColor" : "#FFFFFF00",
+            "color" : "rgba(0, 0, 0, 0.87)",
+            "padding" : "0px",
+            "settings" : {
+              "cardHtml" : "<!DOCTYPE html>\r\n<html lang=\"es\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>Formulario de Mantenimiento</title>\r\n    <link rel=\"stylesheet\" href=\"maintenance-form-compact.css\">\r\n</head>\r\n<body>\r\n    <form id=\"maintenanceForm\">\r\n        <!-- Campo oculto para timestamp original - SOLO se usa en modo edición -->\r\n        <input type=\"hidden\" id=\"mantenimiento_ts_id_crudo\" name=\"mantenimiento_ts_id_crudo\" value=\"${ts}\">\r\n        \r\n        <div>\r\n            <label for=\"condicion\">Condición:</label>\r\n            <select id=\"condicion\" name=\"condicion\">\r\n                <option value=\"\">${condicion:0==1?'✔️ Operativo':condicion:0==2?'⚠️ Desconocido':ocondicion:0==3?'❌ Inoperativo':'Seleccione la condición'}</option>\r\n                <option value=\"1\">✔️ Operativo</option>\r\n                <option value=\"2\">⚠️ Desconocido</option>\r\n                <option value=\"3\">❌ Inoperativo</option>\r\n            </select>\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"base\">Base:</label>\r\n            <input type=\"text\" id=\"base\" name=\"base\" value=\"${mantenimiento_base:0}\">\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"equipo\">Equipo:</label>\r\n            <input type=\"text\" id=\"equipo\" name=\"equipo\" value=\"${mantenimiento_equipo:0}\">\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"cod\">COD:</label>\r\n            <input type=\"text\" id=\"cod\" name=\"cod\" value=\"${mantenimiento_cod:0}\">\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"tipo\">Tipo:</label>\r\n            <input type=\"text\" id=\"tipo\" name=\"tipo\" value=\"${mantenimiento_tipo:0}\">\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"marca\">Marca:</label>\r\n            <input type=\"text\" id=\"marca\" name=\"marca\" value=\"${mantenimiento_marca:0}\">\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"modelo\">Modelo:</label>\r\n            <input type=\"text\" id=\"modelo\" name=\"modelo\" value=\"${mantenimiento_modelo:0}\">\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"tipoWO\">Tipo WO:</label>\r\n            <select id=\"tipoWO\" name=\"tipoWO\">\r\n                <option value=\"\">${mantenimiento_tipo_wo:0?mantenimiento_tipo_wo:0:'Seleccione el tipo de WO'}</option>\r\n                <option value=\"NC\">NC</option>\r\n                <option value=\"PMB\">PM: B</option>\r\n                <option value=\"PMD\">PM: D</option>\r\n                <option value=\"UNSCH\">UNSCH</option>\r\n            </select>\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"reporteFalla\">Reporte Falla:</label>\r\n            <input type=\"text\" id=\"reporteFalla\" name=\"reporteFalla\" value=\"${mantenimiento_reporte_falla:0}\">\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"fechaWO\">Fecha WO:</label>\r\n            <!-- REMOVIDO :date - JavaScript manejará la conversión -->\r\n            <input type=\"date\" id=\"fechaWO\" name=\"fechaWO\" value=\"\">\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"diasEnTaller\">Días En Taller:</label>\r\n            <input type=\"text\" id=\"diasEnTaller\" name=\"diasEnTaller\" value=\"${mantenimiento_dias_en_taller:0}\" readonly>\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"etr\">ETR:</label>\r\n            <select id=\"etr\" name=\"etr\">\r\n                <option value=\"\">${mantenimiento_etr:0?mantenimiento_etr:0:'Seleccione el tipo de ETR'}</option>\r\n                <option value=\"En Busqueda y Cotización\">En Busqueda y Cotización</option>\r\n                <option value=\"En Cotización\">En Cotización</option>\r\n                <option value=\"En Diagnostico\">En Diagnostico</option>\r\n                <option value=\"En Importación\">En Importación</option>\r\n                <option value=\"En Solicitud / Cotización\">En Solicitud / Cotización</option>\r\n                <option value=\"Pendiente Autorización\">Pendiente Autorización</option>\r\n                <option value=\"Pendiente Diagnostico\">Pendiente Diagnostico</option>\r\n                <option value=\"Por Autorización\">Por Autorización</option>\r\n                <option value=\"SIN ETR\">SIN ETR</option>\r\n            </select>\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"observaciones\">Observaciones:</label>\r\n            <textarea id=\"observaciones\" name=\"observaciones\" rows=\"4\">${mantenimiento_observaciones:0}</textarea>\r\n        </div>\r\n        \r\n        <div>\r\n            <label for=\"posicion\">Posición:</label>\r\n            <input type=\"text\" id=\"posicion\" name=\"posicion\" value=\"${mantenimiento_posicion:0}\">\r\n        </div>\r\n        \r\n        <div>\r\n            <button type=\"button\" id=\"backButton\">Volver</button>\r\n            <button type=\"button\" id=\"saveButton\">Guardar</button>\r\n        </div>\r\n    </form>\r\n\r\n    <script>\r\n        // SCRIPT ADAPTADO PARA MANTENIMIENTO - Manejo correcto de fechas\r\n        (function() {\r\n            // Obtener el ts_id desde el campo oculto o usar valor por defecto\r\n            const tsIdCrudoInput = document.getElementById('mantenimiento_ts_id_crudo');\r\n            let ts_id = tsIdCrudoInput && tsIdCrudoInput.value ? Number(tsIdCrudoInput.value) : null;\r\n            \r\n            // Si no hay ts_id válido, usar fecha actual para modo creación\r\n            if (!ts_id || isNaN(ts_id)) {\r\n                ts_id = Date.now();\r\n                console.log(\"No hay ts_id válido, usando fecha actual:\", ts_id);\r\n            } else {\r\n                console.log(\"Valor inicial de ts_id (como número):\", ts_id);\r\n            }\r\n\r\n            // Asignar el valor al campo oculto\r\n            if (tsIdCrudoInput) {\r\n                tsIdCrudoInput.value = ts_id;\r\n                console.log(\"Valor asignado al input 'mantenimiento_ts_id_crudo':\", tsIdCrudoInput.value);\r\n            }\r\n\r\n            // Detectar modo de operación\r\n            const isEditMode = tsIdCrudoInput && tsIdCrudoInput.value && tsIdCrudoInput.value.trim() !== '';\r\n            console.log('Modo detectado:', isEditMode ? 'EDICIÓN' : 'CREACIÓN');\r\n\r\n            // Manejar la fecha WO - CONVERTIR TIMESTAMP A FORMATO CORRECTO\r\n            const fechaWOInput = document.getElementById('fechaWO');\r\n            \r\n            if (fechaWOInput) {\r\n                // Intentar obtener el timestamp de mantenimiento_fecha_wo desde los datos\r\n                let fechaWOTimestamp = null;\r\n                \r\n                // Si hay datos de mantenimiento_fecha_wo en el contexto, usarlos\r\n                if (typeof ${mantenimiento_fecha_wo:0} !== 'undefined' && ${mantenimiento_fecha_wo:0} !== 0) {\r\n                    fechaWOTimestamp = Number(${mantenimiento_fecha_wo:0});\r\n                    console.log(\"Timestamp de fecha WO desde atributos:\", fechaWOTimestamp);\r\n                } else {\r\n                    // Si no hay fecha WO en atributos, usar el timestamp original\r\n                    fechaWOTimestamp = ts_id;\r\n                    console.log(\"No hay fecha WO en atributos, usando timestamp original:\", fechaWOTimestamp);\r\n                }\r\n                \r\n                // Convertir timestamp a formato YYYY-MM-DD\r\n                if (fechaWOTimestamp && !isNaN(fechaWOTimestamp)) {\r\n                    const date = new Date(fechaWOTimestamp);\r\n                    console.log(\"Objeto Date creado desde timestamp:\", date);\r\n\r\n                    // Verificar si la fecha es válida\r\n                    if (!isNaN(date.getTime())) {\r\n                        // Para input type=\"date\" necesitamos formato YYYY-MM-DD\r\n                        const formattedDate = date.toISOString().slice(0, 10);\r\n                        console.log(\"Fecha formateada para el campo date:\", formattedDate);\r\n\r\n                        fechaWOInput.value = formattedDate;\r\n                        console.log(\"Valor asignado al input 'fechaWO':\", fechaWOInput.value);\r\n                    } else {\r\n                        console.error(\"El timestamp no es una fecha válida.\");\r\n                        // Usar fecha actual como fallback\r\n                        const today = new Date();\r\n                        const formattedDate = today.toISOString().slice(0, 10);\r\n                        fechaWOInput.value = formattedDate;\r\n                        console.log(\"Usando fecha actual como fallback:\", formattedDate);\r\n                    }\r\n                }\r\n            }\r\n\r\n            // Referencias a elementos del formulario para cálculo de días\r\n            const diasEnTallerInput = document.getElementById('diasEnTaller');\r\n            \r\n            // Función para calcular días en taller\r\n            function calcularDiasEnTaller() {\r\n                if (fechaWOInput && fechaWOInput.value) {\r\n                    const fechaWO = new Date(fechaWOInput.value);\r\n                    const hoy = new Date();\r\n                    const diferencia = Math.floor((hoy - fechaWO) / (1000 * 60 * 60 * 24));\r\n                    if (diasEnTallerInput) {\r\n                        diasEnTallerInput.value = diferencia;\r\n                        console.log(\"Días en taller calculados:\", diferencia);\r\n                    }\r\n                } else if (diasEnTallerInput) {\r\n                    diasEnTallerInput.value = '';\r\n                }\r\n            }\r\n\r\n            // Calcular días en taller inicialmente\r\n            calcularDiasEnTaller();\r\n            \r\n            // Calcular días en taller cuando cambia la fecha WO\r\n            if (fechaWOInput) {\r\n                fechaWOInput.addEventListener('change', calcularDiasEnTaller);\r\n            }\r\n            \r\n            // Cambiar texto del botón según el modo\r\n            const saveButton = document.getElementById('saveButton');\r\n            if (saveButton && isEditMode) {\r\n                saveButton.textContent = 'Actualizar';\r\n            }\r\n\r\n            // El botón de volver\r\n            const backButton = document.getElementById('backButton');\r\n            if (backButton) {\r\n                backButton.addEventListener('click', function() {\r\n                    console.log(\"Volviendo a la página anterior...\");\r\n                });\r\n            }\r\n            \r\n            // Mostrar valores cargados para debug\r\n            setTimeout(() => {\r\n                console.log('=== VALORES CARGADOS ===');\r\n                console.log('Base:', document.getElementById('base')?.value);\r\n                console.log('Equipo:', document.getElementById('equipo')?.value);\r\n                console.log('COD:', document.getElementById('cod')?.value);\r\n                console.log('Tipo:', document.getElementById('tipo')?.value);\r\n                console.log('Marca:', document.getElementById('marca')?.value);\r\n                console.log('Modelo:', document.getElementById('modelo')?.value);\r\n                console.log('Condición:', document.getElementById('condicion')?.value);\r\n                console.log('Tipo WO:', document.getElementById('tipoWO')?.value);\r\n                console.log('Reporte Falla:', document.getElementById('reporteFalla')?.value);\r\n                console.log('Fecha WO:', fechaWOInput?.value);\r\n                console.log('Días En Taller:', diasEnTallerInput?.value);\r\n                console.log('ETR:', document.getElementById('etr')?.value);\r\n                console.log('Observaciones:', document.getElementById('observaciones')?.value);\r\n                console.log('Posición:', document.getElementById('posicion')?.value);\r\n            }, 200);\r\n\r\n        })();\r\n    </script>\r\n</body>\r\n</html>\r\n",
+              "cardCss" : "/* Estilos generales */\r\nbody {\r\n  font-family: \"Roboto\", \"Segoe UI\", Arial, sans-serif;\r\n  background-color: #f8f9fa;\r\n  color: #2c3e50;\r\n  margin: 0;\r\n  padding: 8px;\r\n  line-height: 1.3;\r\n  font-size: 13px;\r\n  min-height: 100vh;\r\n}\r\n\r\n/* Contenedor principal con scroll forzado */\r\n#maintenanceForm {\r\n  background-color: white;\r\n  border-radius: 6px;\r\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);\r\n  padding: 12px 12px 120px 12px;\r\n  max-width: 1000px;\r\n  height: 85vh;\r\n  max-height: 85vh;\r\n  min-height: 500px;\r\n  margin: 0 auto;\r\n  transition: all 0.3s ease;\r\n  border-top: 3px solid #ff6900;\r\n  display: grid;\r\n  grid-template-columns: repeat(2, 1fr);\r\n  gap: 4px;\r\n  overflow-y: scroll;\r\n  overflow-x: hidden;\r\n  box-sizing: border-box;\r\n}\r\n\r\n#maintenanceForm:hover {\r\n  box-shadow: 0 6px 20px rgba(255, 105, 0, 0.12);\r\n}\r\n\r\n/* Scrollbar personalizado más visible */\r\n#maintenanceForm::-webkit-scrollbar {\r\n  width: 10px;\r\n}\r\n\r\n#maintenanceForm::-webkit-scrollbar-track {\r\n  background: #f1f1f1;\r\n  border-radius: 5px;\r\n}\r\n\r\n#maintenanceForm::-webkit-scrollbar-thumb {\r\n  background: #ff6900;\r\n  border-radius: 5px;\r\n  border: 1px solid #f1f1f1;\r\n}\r\n\r\n#maintenanceForm::-webkit-scrollbar-thumb:hover {\r\n  background: #e55a00;\r\n}\r\n\r\n/* Para Firefox - scrollbar siempre visible */\r\n#maintenanceForm {\r\n  scrollbar-width: auto;\r\n  scrollbar-color: #ff6900 #f1f1f1;\r\n}\r\n\r\n/* Campos del formulario */\r\n#maintenanceForm > div {\r\n  margin-bottom: 4px;\r\n  display: flex;\r\n  align-items: center;\r\n  padding: 2px;\r\n  border-radius: 4px;\r\n  transition: background-color 0.2s ease;\r\n  min-height: 32px;\r\n}\r\n\r\n#maintenanceForm > div:hover {\r\n  background-color: rgba(255, 105, 0, 0.02);\r\n}\r\n\r\n/* Contenedor de botones con mucho más espacio */\r\n#maintenanceForm > div:last-child {\r\n  grid-column: 1 / -1;\r\n  background-color: white !important;\r\n  margin-top: 20px;\r\n  margin-bottom: 40px;\r\n  padding: 20px 0 40px 0;\r\n  border-top: 2px solid #f1f3f4;\r\n  justify-content: center;\r\n  display: flex;\r\n  gap: 12px;\r\n  position: relative;\r\n  z-index: 10;\r\n  min-height: 80px;\r\n}\r\n\r\n/* Etiquetas */\r\nlabel {\r\n  display: block;\r\n  font-weight: 600;\r\n  color: #34495e;\r\n  width: 110px;\r\n  padding-right: 8px;\r\n  text-align: right;\r\n  flex-shrink: 0;\r\n  transition: all 0.2s ease;\r\n  font-size: 12px;\r\n}\r\n\r\n#maintenanceForm > div:hover label {\r\n  color: #ff6900;\r\n}\r\n\r\n/* Inputs, selects y textarea */\r\ninput,\r\nselect,\r\ntextarea {\r\n  flex: 1;\r\n  padding: 6px 8px;\r\n  border: 1px solid #e1e8ed;\r\n  border-radius: 4px;\r\n  font-size: 12px;\r\n  background-color: #fff;\r\n  transition: all 0.2s ease;\r\n  font-family: inherit;\r\n  height: 28px;\r\n  box-sizing: border-box;\r\n}\r\n\r\n/* Textarea específico */\r\ntextarea {\r\n  height: 50px !important;\r\n  min-height: 50px;\r\n  max-height: 80px;\r\n  resize: vertical;\r\n  padding-top: 6px;\r\n}\r\n\r\ninput:hover,\r\nselect:hover,\r\ntextarea:hover {\r\n  border-color: #ff8533;\r\n  box-shadow: 0 1px 4px rgba(255, 105, 0, 0.1);\r\n}\r\n\r\ninput:focus,\r\nselect:focus,\r\ntextarea:focus {\r\n  outline: none;\r\n  border-color: #ff6900;\r\n  box-shadow: 0 0 0 2px rgba(255, 105, 0, 0.15);\r\n  background-color: #fffbf8;\r\n}\r\n\r\n/* Campos de solo lectura */\r\ninput[readonly] {\r\n  background-color: #f8f9fa;\r\n  border-color: #dee2e6;\r\n  color: #6c757d;\r\n  cursor: not-allowed;\r\n}\r\n\r\ninput[readonly]:hover {\r\n  border-color: #dee2e6;\r\n  box-shadow: none;\r\n}\r\n\r\n/* Botones más visibles */\r\nbutton {\r\n  padding: 8px 20px;\r\n  border: none;\r\n  border-radius: 4px;\r\n  font-size: 13px;\r\n  font-weight: 600;\r\n  cursor: pointer;\r\n  transition: all 0.2s ease;\r\n  margin-right: 8px;\r\n  position: relative;\r\n  overflow: hidden;\r\n  text-transform: uppercase;\r\n  letter-spacing: 0.3px;\r\n  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);\r\n  height: 40px;\r\n  min-width: 120px;\r\n}\r\n\r\nbutton::after {\r\n  content: \"\";\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 5px;\r\n  height: 5px;\r\n  background: rgba(255, 255, 255, 0.6);\r\n  opacity: 0;\r\n  border-radius: 100%;\r\n  transform: scale(1, 1) translate(-50%);\r\n  transform-origin: 50% 50%;\r\n}\r\n\r\nbutton:focus:not(:active)::after {\r\n  animation: ripple 0.4s ease-out;\r\n}\r\n\r\n@keyframes ripple {\r\n  0% {\r\n    transform: scale(0, 0);\r\n    opacity: 0.6;\r\n  }\r\n  100% {\r\n    transform: scale(20, 20);\r\n    opacity: 0;\r\n  }\r\n}\r\n\r\n#saveButton {\r\n  background: linear-gradient(135deg, #ff6900, #ff8533);\r\n  color: white;\r\n  box-shadow: 0 3px 8px rgba(255, 105, 0, 0.3);\r\n}\r\n\r\n#saveButton:hover {\r\n  background: linear-gradient(135deg, #e55a00, #ff6900);\r\n  transform: translateY(-2px);\r\n  box-shadow: 0 5px 12px rgba(255, 105, 0, 0.4);\r\n}\r\n\r\n#saveButton:active {\r\n  transform: translateY(0);\r\n  box-shadow: 0 3px 6px rgba(255, 105, 0, 0.3);\r\n}\r\n\r\n#backButton {\r\n  background: linear-gradient(135deg, #6c757d, #868e96);\r\n  color: white;\r\n  box-shadow: 0 3px 8px rgba(108, 117, 125, 0.3);\r\n}\r\n\r\n#backButton:hover {\r\n  background: linear-gradient(135deg, #5a6268, #6c757d);\r\n  transform: translateY(-2px);\r\n  box-shadow: 0 5px 12px rgba(108, 117, 125, 0.4);\r\n}\r\n\r\n#backButton:active {\r\n  transform: translateY(0);\r\n  box-shadow: 0 3px 6px rgba(108, 117, 125, 0.3);\r\n}\r\n\r\n/* Estilos para los selects de condición */\r\n#condicion option[value=\"1\"] {\r\n  background-color: rgba(40, 167, 69, 0.1);\r\n  color: #28a745;\r\n}\r\n\r\n#condicion option[value=\"2\"] {\r\n  background-color: rgba(255, 193, 7, 0.1);\r\n  color: #ffc107;\r\n}\r\n\r\n#condicion option[value=\"3\"] {\r\n  background-color: rgba(220, 53, 69, 0.1);\r\n  color: #dc3545;\r\n}\r\n\r\n/* Animación para los campos al cargar */\r\n#maintenanceForm > div {\r\n  animation: slideIn 0.3s ease-out forwards;\r\n  opacity: 0;\r\n  transform: translateY(8px);\r\n}\r\n\r\n@keyframes slideIn {\r\n  to {\r\n    opacity: 1;\r\n    transform: translateY(0);\r\n  }\r\n}\r\n\r\n/* Aplicar animación respetando el orden del HTML */\r\n#maintenanceForm > div:nth-child(1) {\r\n  animation-delay: 0.05s;\r\n}\r\n#maintenanceForm > div:nth-child(2) {\r\n  animation-delay: 0.08s;\r\n}\r\n#maintenanceForm > div:nth-child(3) {\r\n  animation-delay: 0.11s;\r\n}\r\n#maintenanceForm > div:nth-child(4) {\r\n  animation-delay: 0.14s;\r\n}\r\n#maintenanceForm > div:nth-child(5) {\r\n  animation-delay: 0.17s;\r\n}\r\n#maintenanceForm > div:nth-child(6) {\r\n  animation-delay: 0.2s;\r\n}\r\n#maintenanceForm > div:nth-child(7) {\r\n  animation-delay: 0.23s;\r\n}\r\n#maintenanceForm > div:nth-child(8) {\r\n  animation-delay: 0.26s;\r\n}\r\n#maintenanceForm > div:nth-child(9) {\r\n  animation-delay: 0.29s;\r\n}\r\n#maintenanceForm > div:nth-child(10) {\r\n  animation-delay: 0.32s;\r\n}\r\n#maintenanceForm > div:nth-child(11) {\r\n  animation-delay: 0.35s;\r\n}\r\n#maintenanceForm > div:nth-child(12) {\r\n  animation-delay: 0.38s;\r\n}\r\n#maintenanceForm > div:nth-child(13) {\r\n  animation-delay: 0.41s;\r\n}\r\n#maintenanceForm > div:nth-child(14) {\r\n  animation-delay: 0.44s;\r\n}\r\n#maintenanceForm > div:nth-child(15) {\r\n  animation-delay: 0.47s;\r\n}\r\n#maintenanceForm > div:nth-child(16) {\r\n  animation-delay: 0.5s;\r\n}\r\n\r\n/* Responsive */\r\n@media (max-width: 768px) {\r\n  #maintenanceForm {\r\n    display: block;\r\n    padding: 10px 10px 140px 10px;\r\n    margin: 5px;\r\n    height: 90vh;\r\n    max-height: 90vh;\r\n  }\r\n\r\n  label {\r\n    width: 100%;\r\n    text-align: left;\r\n    margin-bottom: 3px;\r\n    font-weight: 600;\r\n  }\r\n\r\n  #maintenanceForm > div {\r\n    flex-direction: column;\r\n    align-items: flex-start;\r\n    margin-bottom: 8px;\r\n    min-height: auto;\r\n  }\r\n\r\n  input,\r\n  select,\r\n  textarea {\r\n    width: 100%;\r\n    box-sizing: border-box;\r\n  }\r\n\r\n  textarea {\r\n    height: 40px !important;\r\n    min-height: 40px;\r\n  }\r\n\r\n  /* Botones en móvil - HORIZONTAL para que se vean ambos */\r\n  #maintenanceForm > div:last-child {\r\n    flex-direction: row;\r\n    justify-content: center;\r\n    gap: 12px;\r\n    border-top: 2px solid #e1e8ed;\r\n    padding: 25px 0 50px 0;\r\n    margin: 25px 0 50px 0;\r\n    background-color: white !important;\r\n    min-height: 100px;\r\n  }\r\n\r\n  button {\r\n    flex: 1;\r\n    margin: 0;\r\n    padding: 12px 16px;\r\n    height: 44px;\r\n    max-width: 150px;\r\n  }\r\n}\r\n\r\n/* Para pantallas muy pequeñas - MANTENER HORIZONTAL */\r\n@media (max-width: 480px) {\r\n  body {\r\n    padding: 3px;\r\n  }\r\n\r\n  #maintenanceForm {\r\n    padding: 8px 8px 160px 8px;\r\n    height: 95vh;\r\n    max-height: 95vh;\r\n  }\r\n\r\n  #maintenanceForm > div:last-child {\r\n    flex-direction: row;\r\n    gap: 8px;\r\n    padding: 30px 0 60px 0;\r\n    margin: 30px 0 60px 0;\r\n    min-height: 120px;\r\n  }\r\n\r\n  button {\r\n    width: 45%;\r\n    margin: 0;\r\n    padding: 14px 12px;\r\n    height: 48px;\r\n    font-size: 11px;\r\n  }\r\n\r\n  #backButton {\r\n    order: 0;\r\n  }\r\n\r\n  #saveButton {\r\n    order: 1;\r\n  }\r\n}\r\n\r\n/* Mejoras adicionales para accesibilidad */\r\nbutton:focus-visible {\r\n  outline: 2px solid rgba(255, 105, 0, 0.5);\r\n  outline-offset: 1px;\r\n}\r\n\r\ninput:focus-visible,\r\nselect:focus-visible,\r\ntextarea:focus-visible {\r\n  outline: 1px solid #ff6900;\r\n  outline-offset: 1px;\r\n}\r\n\r\n/* Estados de validación compactos */\r\n.field-error input,\r\n.field-error select,\r\n.field-error textarea {\r\n  border-color: #dc3545;\r\n  box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.15);\r\n}\r\n\r\n.field-success input,\r\n.field-success select,\r\n.field-success textarea {\r\n  border-color: #28a745;\r\n  box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.15);\r\n}\r\n"
+            },
+            "title" : "Formulario Entradas MTTO",
+            "dropShadow" : false,
+            "enableFullscreen" : false,
+            "widgetStyle" : {
+              "border" : "1px solid #0a3d62",
+              "borderRadius" : "8px",
+              "backgroundColor" : "#ffffff",
+              "paddingTop" : "15px",
+              "paddingLeft" : "15px",
+              "paddingRight" : "15px",
+              "paddingBottom" : "50px",
+              "marginTop" : "10px",
+              "marginBottom" : "50px",
+              "marginLeft" : "10px",
+              "marginRight" : "10px",
+              "boxShadow" : "0 4px 12px rgba(10, 61, 98, 0.1)",
+              "fontFamily" : "'Roboto', Arial, sans-serif",
+              "color" : "#333333",
+              "transition" : "all 0.2s ease-in-out",
+              "width" : "calc(100% - 20px)",
+              "boxSizing" : "border-box",
+              "overflow" : "hidden"
+            },
+            "titleStyle" : {
+              "fontSize" : "28px",
+              "fontWeight" : 600,
+              "padding" : "5px 10px 5px 10px"
+            },
+            "useDashboardTimewindow" : true,
+            "showLegend" : false,
+            "actions" : {
+              "elementClick" : [ {
+                "name" : "saveButton",
+                "icon" : "more_horiz",
+                "useShowWidgetActionFunction" : null,
+                "showWidgetActionFunction" : "return true;",
+                "type" : "custom",
+                "customFunction" : "// FUNCIÓN PARA EL BOTÓN ACTUALIZAR\r\n// =================================\r\n\r\n// Pedir confirmación al usuario\r\nconst choose = confirm(\"¿Seguro que desea modificar la Telemetría de Mantenimiento?\")\r\nif (!choose) {\r\n  alert(\"Operación cancelada\")\r\n  // Salir de la ejecución si el usuario cancela\r\n  return;\r\n}\r\n\r\n// --- 1. NAVEGACIÓN ---\r\n// Función para abrir un estado del dashboard\r\nfunction openDashboardState(stateId) {\r\n  console.log(\"Navegando al estado del dashboard:\", stateId)\r\n  widgetContext.stateController.openState(stateId, {}, false)\r\n}\r\n// Navegar inmediatamente después de confirmar\r\n//openDashboardState(\"EntradaMTTO\")\r\n\r\n\r\n// --- 2. OBTENER TIMESTAMPS ---\r\n// Obtener el timestamp original del registro. ESTE ES EL QUE SE SOBREESCRIBE.\r\nconst tsIdCrudoElement = document.getElementById(\"mantenimiento_ts_id_crudo\")\r\nconst ts_id_original = Number(tsIdCrudoElement.value)\r\n\r\nconsole.log(\"🔥 TIMESTAMP ORIGINAL A SOBREESCRIBIR:\", ts_id_original)\r\n\r\n// Obtener el timestamp del campo \"Fecha WO\" usando tu lógica\r\nconst fechaElement = document.getElementById(\"fechaWO\")\r\nlet fechaWOValue\r\nif (fechaElement && fechaElement.value) {\r\n  try {\r\n    // El input type=\"date\" devuelve 'YYYY-MM-DD'.\r\n    // new Date() lo interpreta correctamente como el inicio de ese día en la zona horaria local.\r\n    fechaWOValue = new Date(fechaElement.value).getTime()\r\n    console.log(\"Valor de fechaElement.value (antes de convertir a timestamp):\", fechaElement.value)\r\n    console.log(\"Fecha WO convertida a timestamp:\", fechaWOValue)\r\n  } catch (error) {\r\n    console.error(\"Error al intentar convertir fechaElement.value a timestamp:\", error)\r\n    // Si hay error, usamos el timestamp original como fallback para no perder la fecha\r\n    fechaWOValue = ts_id_original\r\n  }\r\n} else {\r\n  console.warn(\"fechaElement.value está vacío, utilizando el timestamp original como fallback.\")\r\n  // Si el campo está vacío, usamos el timestamp original para mantener la consistencia\r\n  fechaWOValue = ts_id_original\r\n}\r\n\r\n// --- 3. OBTENER VALORES DEL FORMULARIO ---\r\nconst condicionValue = document.getElementById(\"condicion\").value.trim()\r\nconst baseValue = document.getElementById(\"base\").value.trim()\r\nconst equipoValue = document.getElementById(\"equipo\").value.trim()\r\nconst codValue = document.getElementById(\"cod\").value.trim()\r\nconst tipoValue = document.getElementById(\"tipo\").value.trim()\r\nconst marcaValue = document.getElementById(\"marca\").value.trim()\r\nconst modeloValue = document.getElementById(\"modelo\").value.trim()\r\nconst tipoWOValue = document.getElementById(\"tipoWO\").value.trim()\r\nconst reporteFailaValue = document.getElementById(\"reporteFalla\").value.trim()\r\nconst diasEnTallerValue = document.getElementById(\"diasEnTaller\").value.trim()\r\nconst etrValue = document.getElementById(\"etr\").value.trim()\r\nconst observacionesValue = document.getElementById(\"observaciones\").value.trim()\r\nconst posicionValue = document.getElementById(\"posicion\").value.trim()\r\n\r\n// --- 4. CONSTRUIR PAYLOAD PARA GUARDAR ---\r\n// Crear valuesHash - SIEMPRE USA EL TIMESTAMP ORIGINAL\r\nconst valuesHash = {\r\n  ts_id: ts_id_original, // 🔥 SIEMPRE EL MISMO TIMESTAMP ORIGINAL\r\n  trigger: \"false\",\r\n}\r\n\r\n// Agregar valores no vacíos al hash\r\nif (baseValue) valuesHash.mantenimiento_base = baseValue\r\nif (equipoValue) valuesHash.mantenimiento_equipo = equipoValue\r\nif (codValue) valuesHash.mantenimiento_cod = codValue\r\nif (tipoValue) valuesHash.mantenimiento_tipo = tipoValue\r\nif (marcaValue) valuesHash.mantenimiento_marca = marcaValue\r\nif (modeloValue) valuesHash.mantenimiento_modelo = modeloValue\r\nif (condicionValue && !isNaN(Number.parseInt(condicionValue))) valuesHash.condicion = Number.parseInt(condicionValue)\r\nif (tipoWOValue) valuesHash.mantenimiento_tipo_wo = tipoWOValue\r\nif (reporteFailaValue) valuesHash.mantenimiento_reporte_falla = reporteFailaValue\r\nvaluesHash.mantenimiento_fecha_wo = fechaWOValue // Este es el timestamp del campo fecha\r\nif (diasEnTallerValue && !isNaN(Number.parseInt(diasEnTallerValue)))\r\n  valuesHash.mantenimiento_dias_en_taller = Number.parseInt(diasEnTallerValue)\r\nif (etrValue) valuesHash.mantenimiento_etr = etrValue\r\nif (observacionesValue) valuesHash.mantenimiento_observaciones = observacionesValue\r\nif (posicionValue) valuesHash.mantenimiento_posicion = posicionValue\r\n\r\n// Crear array para guardar - USA EL MISMO TIMESTAMP ORIGINAL SIEMPRE\r\nconst telemetryHashArray = [\r\n  {\r\n    key: \"ts\",\r\n    value: fechaWOValue,\r\n  },\r\n  {\r\n    // 🔥 SIEMPRE EL MISMO TIMESTAMP ORIGINAL\r\n    key: \"values\",\r\n    value: valuesHash,\r\n  },\r\n]\r\n\r\nconsole.log(\"🔥 VERIFICACIÓN FINAL:\")\r\nconsole.log(\"Timestamp en array:\", telemetryHashArray[0].value)\r\nconsole.log(\"Timestamp en valuesHash:\", valuesHash.ts_id)\r\nconsole.log(\"¿Son iguales?\", telemetryHashArray[0].value === valuesHash.ts_id)\r\nconsole.log(\"Array completo a guardar:\", telemetryHashArray)\r\n\r\n// --- 5. GUARDAR TELEMETRÍA ---\r\n// Obtener servicios de ThingsBoard\r\nconst $injector = widgetContext.$scope.$injector\r\nconst attributeService = $injector.get(widgetContext.servicesMap.get(\"attributeService\"))\r\n\r\n// Feedback visual para el botón\r\nconst saveButton = document.getElementById(\"saveButton\")\r\nsaveButton.disabled = true\r\nsaveButton.textContent = \"Actualizando...\"\r\n\r\n// Llamada al servicio para guardar\r\nattributeService.saveEntityTimeseries(entityId, \"ANY\", telemetryHashArray).subscribe(\r\n  () => {\r\n    console.log(\"✅ TELEMETRÍA SOBREESCRITA EN EL MISMO TIMESTAMP:\", ts_id_original)\r\n    alert(\"✅ Datos actualizados correctamente presione el botón VOLVER\")\r\n    saveButton.disabled = false\r\n    saveButton.textContent = \"Actualizar\"\r\n    // Actualizar el widget para reflejar cambios\r\n    setTimeout(() => widgetContext.updateAliases(), 2000)\r\n  },\r\n  (error) => {\r\n    console.error(\"❌ ERROR AL SOBREESCRIBIR:\", error)\r\n    alert(\"❌ Error: \" + error.message)\r\n    saveButton.disabled = false\r\n    saveButton.textContent = \"Actualizar\"\r\n  },\r\n)\r\n",
+                "openInSeparateDialog" : false,
+                "openInPopover" : false,
+                "id" : "917fa9ec-30cc-c146-8ca8-f700f7ba74a1"
+              }, {
+                "name" : "backButton",
+                "icon" : "more_horiz",
+                "useShowWidgetActionFunction" : null,
+                "showWidgetActionFunction" : "return true;",
+                "type" : "updateDashboardState",
+                "targetDashboardStateId" : "EntradaMTTO",
+                "setEntityId" : true,
+                "stateEntityParamName" : null,
+                "openRightLayout" : false,
+                "openInSeparateDialog" : false,
+                "openInPopover" : false,
+                "id" : "b616a30f-f9f5-6d91-5c58-8e708fbf0376"
+              } ],
+              "headerButton" : [ ]
+            },
+            "enableDataExport" : false,
+            "widgetCss" : "",
+            "pageSize" : 1024,
+            "noDataDisplayMessage" : "",
+            "legendConfig" : {
+              "direction" : "column",
+              "position" : "bottom",
+              "sortDataKeys" : false,
+              "showMin" : false,
+              "showMax" : false,
+              "showAvg" : false,
+              "showTotal" : true,
+              "showLatest" : false
+            },
+            "showTitleIcon" : false,
+            "titleTooltip" : ""
+          },
+          "row" : 0,
+          "col" : 0,
+          "id" : "a80f055d-06c9-caac-ef2c-596c3ada2739"
+        },
+        "90a382e0-7dd1-d752-e5ec-60219d445dc5" : {
+          "isSystemType" : true,
+          "bundleAlias" : "cards",
+          "typeAlias" : "timeseries_table",
+          "type" : "timeseries",
+          "title" : "New widget",
+          "image" : null,
+          "description" : null,
+          "sizeX" : 8,
+          "sizeY" : 6.5,
+          "config" : {
+            "datasources" : [ {
+              "type" : "entity",
+              "name" : null,
+              "entityAliasId" : "09b60ead-b402-fee5-5236-785ecac4f1ec",
+              "filterId" : null,
+              "dataKeys" : [ {
+                "name" : "operativo",
+                "type" : "timeseries",
+                "label" : "operativo",
+                "color" : "#2196f3",
+                "settings" : { },
+                "_hash" : 0.20025672708585684
+              }, {
+                "name" : "condicion",
+                "type" : "timeseries",
+                "label" : "condicion",
+                "color" : "#4caf50",
+                "settings" : { },
+                "_hash" : 0.007404558023615504
+              } ],
+              "alarmFilterConfig" : {
+                "statusList" : [ "ACTIVE" ]
+              },
+              "latestDataKeys" : [ ]
+            } ],
+            "timewindow" : {
+              "hideInterval" : false,
+              "hideLastInterval" : false,
+              "hideQuickInterval" : false,
+              "hideAggregation" : false,
+              "hideAggInterval" : false,
+              "hideTimezone" : false,
+              "selectedTab" : 0,
+              "realtime" : {
+                "realtimeType" : 0,
+                "timewindowMs" : 2592000000,
+                "quickInterval" : "CURRENT_DAY",
+                "interval" : 1000
+              },
+              "aggregation" : {
+                "type" : "NONE",
+                "limit" : 200
+              }
+            },
+            "showTitle" : true,
+            "backgroundColor" : "rgb(255, 255, 255)",
+            "color" : "rgba(0, 0, 0, 0.87)",
+            "padding" : "8px",
+            "settings" : {
+              "showTimestamp" : true,
+              "displayPagination" : true,
+              "defaultPageSize" : 10
+            },
+            "title" : "New Timeseries table",
+            "dropShadow" : true,
+            "enableFullscreen" : true,
+            "titleStyle" : {
+              "fontSize" : "16px",
+              "fontWeight" : 400,
+              "padding" : "5px 10px 5px 10px"
+            },
+            "useDashboardTimewindow" : false,
+            "showLegend" : false,
+            "widgetStyle" : { },
+            "actions" : { },
+            "showTitleIcon" : false,
+            "iconColor" : "rgba(0, 0, 0, 0.87)",
+            "iconSize" : "24px",
+            "displayTimewindow" : true
+          },
+          "row" : 0,
+          "col" : 0,
+          "id" : "90a382e0-7dd1-d752-e5ec-60219d445dc5"
+        }
+      },
+      "states" : {
+        "tseleccionado" : {
+          "name" : "tSeleccionado",
+          "root" : false,
+          "layouts" : {
+            "main" : {
+              "widgets" : {
+                "cdd28e91-5d8c-a5eb-9712-725e65d222aa" : {
+                  "sizeX" : 9,
+                  "sizeY" : 8,
+                  "row" : 0,
+                  "col" : 0
+                }
+              },
+              "gridSettings" : {
+                "backgroundColor" : "#eeeeee",
+                "columns" : 24,
+                "margin" : 10,
+                "outerMargin" : true,
+                "backgroundSizeMode" : "100%"
+              }
+            }
+          }
+        },
+        "historico_global" : {
+          "name" : "Histórico Global",
+          "root" : true,
+          "layouts" : {
+            "main" : {
+              "widgets" : {
+                "c96a4092-4348-5f8a-6ef7-6d5db01cc178" : {
+                  "sizeX" : 100,
+                  "sizeY" : 53,
+                  "row" : 0,
+                  "col" : 0
+                }
+              },
+              "gridSettings" : {
+                "backgroundColor" : "#EEEEEEED",
+                "columns" : 100,
+                "margin" : 20,
+                "outerMargin" : true,
+                "backgroundSizeMode" : "100%",
+                "autoFillHeight" : true,
+                "backgroundImageUrl" : null,
+                "mobileAutoFillHeight" : false,
+                "mobileRowHeight" : 70
+              }
+            }
+          }
+        },
+        "configuracion_parametros" : {
+          "name" : "configuracion_parametros",
+          "root" : false,
+          "layouts" : {
+            "main" : {
+              "widgets" : {
+                "ad5548a9-af3c-041d-285f-c87a523a4ccb" : {
+                  "sizeX" : 24,
+                  "sizeY" : 13,
+                  "row" : 0,
+                  "col" : 0
+                }
+              },
+              "gridSettings" : {
+                "backgroundColor" : "#eeeeee",
+                "columns" : 24,
+                "margin" : 10,
+                "outerMargin" : true,
+                "backgroundSizeMode" : "100%"
+              }
+            }
+          }
+        },
+        "global" : {
+          "name" : "global",
+          "root" : false,
+          "layouts" : {
+            "main" : {
+              "widgets" : {
+                "2367c1ae-94fc-cfd0-83a4-9f07b4249204" : {
+                  "sizeX" : 24,
+                  "sizeY" : 8,
+                  "row" : 0,
+                  "col" : 0
+                },
+                "8f33fb77-6938-a758-a343-8873f6f5d480" : {
+                  "sizeX" : 24,
+                  "sizeY" : 4,
+                  "row" : 8,
+                  "col" : 0
+                }
+              },
+              "gridSettings" : {
+                "backgroundColor" : "#eeeeee",
+                "columns" : 24,
+                "margin" : 10,
+                "outerMargin" : true,
+                "backgroundSizeMode" : "100%",
+                "autoFillHeight" : true,
+                "backgroundImageUrl" : null,
+                "mobileAutoFillHeight" : false,
+                "mobileRowHeight" : 70
+              }
+            }
+          }
+        },
+        "editar_mantenimiento" : {
+          "name" : "Editar",
+          "root" : false,
+          "layouts" : {
+            "main" : {
+              "widgets" : {
+                "a80f055d-06c9-caac-ef2c-596c3ada2739" : {
+                  "sizeX" : 12,
+                  "sizeY" : 15,
+                  "row" : 0,
+                  "col" : 6
+                }
+              },
+              "gridSettings" : {
+                "backgroundColor" : "#eeeeee",
+                "columns" : 24,
+                "margin" : 10,
+                "outerMargin" : true,
+                "backgroundSizeMode" : "100%",
+                "autoFillHeight" : true,
+                "backgroundImageUrl" : null,
+                "mobileAutoFillHeight" : false,
+                "mobileRowHeight" : 70
+              }
+            }
+          }
+        },
+        "EntradaMTTO" : {
+          "name" : "EntradaMTTO",
+          "root" : false,
+          "layouts" : {
+            "main" : {
+              "widgets" : {
+                "810635a1-960d-8bf1-1b97-458c409ad0a7" : {
+                  "sizeX" : 19,
+                  "sizeY" : 21,
+                  "row" : 0,
+                  "col" : 13,
+                  "mobileOrder" : 10,
+                  "mobileHide" : false
+                },
+                "07941c70-a0dc-c833-55c6-df4012e5f3f2" : {
+                  "sizeX" : 13,
+                  "sizeY" : 21,
+                  "row" : 0,
+                  "col" : 0,
+                  "mobileOrder" : 1,
+                  "mobileHeight" : 17
+                },
+                "90a382e0-7dd1-d752-e5ec-60219d445dc5" : {
+                  "sizeX" : 23,
+                  "sizeY" : 8,
+                  "row" : 21,
+                  "col" : 0,
+                  "mobileHide" : true,
+                  "desktopHide" : true
+                }
+              },
+              "gridSettings" : {
+                "backgroundColor" : "#EEEEEE",
+                "columns" : 32,
+                "margin" : 20,
+                "outerMargin" : true,
+                "backgroundSizeMode" : "100%",
+                "autoFillHeight" : true,
+                "backgroundImageUrl" : null,
+                "mobileAutoFillHeight" : false,
+                "mobileRowHeight" : 70
+              }
+            }
+          }
+        }
+      },
+      "entityAliases" : {
+        "298dab6b-fd56-d92b-b098-860aa22a5e90" : {
+          "id" : "298dab6b-fd56-d92b-b098-860aa22a5e90",
+          "alias" : "dispositivo",
+          "filter" : {
+            "type" : "deviceType",
+            "resolveMultiple" : true,
+            "deviceTypes" : [ "GSE.MOTOR" ],
+            "deviceNameFilter" : ""
+          }
+        },
+        "09b60ead-b402-fee5-5236-785ecac4f1ec" : {
+          "id" : "09b60ead-b402-fee5-5236-785ecac4f1ec",
+          "alias" : "vehiculoSeleccionado",
+          "filter" : {
+            "type" : "stateEntity",
+            "resolveMultiple" : true,
+            "stateEntityParamName" : "",
+            "defaultStateEntity" : null
+          }
+        },
+        "1a31dee2-7a30-c0f3-91c7-b4d95a646d8a" : {
+          "id" : "1a31dee2-7a30-c0f3-91c7-b4d95a646d8a",
+          "alias" : "dispositivo1",
+          "filter" : {
+            "type" : "entityGroup",
+            "resolveMultiple" : true,
+            "groupStateEntity" : false,
+            "stateEntityParamName" : null,
+            "defaultStateGroupType" : null,
+            "defaultStateEntityGroup" : null,
+            "groupType" : "DEVICE",
+            "entityGroup" : "bc887410-810a-11ef-a451-7d9d80d657ac"
+          }
+        },
+        "e97a12a6-61e6-6865-0b74-9ebb843fbf9e" : {
+          "id" : "e97a12a6-61e6-6865-0b74-9ebb843fbf9e",
+          "alias" : "Tanque Global",
+          "filter" : {
+            "type" : "singleEntity",
+            "resolveMultiple" : false,
+            "singleEntity" : {
+              "entityType" : "ASSET",
+              "id" : "1c5594a0-ac70-11ef-b09c-d10049eb6a6d"
+            }
+          }
+        },
+        "5b92a206-5253-35d1-e8a1-a4ae74efdf32" : {
+          "id" : "5b92a206-5253-35d1-e8a1-a4ae74efdf32",
+          "alias" : "Inventario",
+          "filter" : {
+            "type" : "deviceType",
+            "resolveMultiple" : true,
+            "deviceTypes" : [ "MENZIESGSE", "GSE.NOMOTOR" ],
+            "deviceNameFilter" : ""
+          }
+        }
+      },
+      "filters" : {
+        "4f37dc61-108f-90e3-99c0-e0440249dbd3" : {
+          "id" : "4f37dc61-108f-90e3-99c0-e0440249dbd3",
+          "filter" : "Estación, GSE, Servicio",
+          "keyFilters" : [ {
+            "key" : {
+              "type" : "ATTRIBUTE",
+              "key" : "estacion"
+            },
+            "valueType" : "STRING",
+            "predicates" : [ {
+              "keyFilterPredicate" : {
+                "operation" : "CONTAINS",
+                "value" : {
+                  "defaultValue" : ""
+                },
+                "ignoreCase" : true,
+                "type" : "STRING"
+              },
+              "userInfo" : {
+                "editable" : true,
+                "label" : "",
+                "autogeneratedLabel" : true,
+                "order" : 0
+              }
+            } ]
+          }, {
+            "key" : {
+              "type" : "ATTRIBUTE",
+              "key" : "VehicleType"
+            },
+            "valueType" : "STRING",
+            "predicates" : [ {
+              "keyFilterPredicate" : {
+                "operation" : "CONTAINS",
+                "value" : {
+                  "defaultValue" : ""
+                },
+                "ignoreCase" : true,
+                "type" : "STRING"
+              },
+              "userInfo" : {
+                "editable" : true,
+                "label" : "",
+                "autogeneratedLabel" : true,
+                "order" : 0
+              }
+            } ]
+          }, {
+            "key" : {
+              "type" : "ATTRIBUTE",
+              "key" : "tipoServicio"
+            },
+            "valueType" : "STRING",
+            "predicates" : [ {
+              "keyFilterPredicate" : {
+                "operation" : "CONTAINS",
+                "value" : {
+                  "defaultValue" : ""
+                },
+                "ignoreCase" : true,
+                "type" : "STRING"
+              },
+              "userInfo" : {
+                "editable" : true,
+                "label" : "",
+                "autogeneratedLabel" : true,
+                "order" : 0
+              }
+            } ]
+          } ],
+          "editable" : true
+        },
+        "9663fe60-23e6-9b1b-20cb-42154cb6a363" : {
+          "id" : "9663fe60-23e6-9b1b-20cb-42154cb6a363",
+          "filter" : "Ciudad",
+          "keyFilters" : [ {
+            "key" : {
+              "type" : "ATTRIBUTE",
+              "key" : "City"
+            },
+            "valueType" : "STRING",
+            "predicates" : [ {
+              "keyFilterPredicate" : {
+                "operation" : "EQUAL",
+                "value" : {
+                  "defaultValue" : "BOG",
+                  "dynamicValue" : {
+                    "sourceType" : "CURRENT_USER",
+                    "sourceAttribute" : "cityFilterSelection",
+                    "inherit" : false
+                  }
+                },
+                "ignoreCase" : true,
+                "type" : "STRING"
+              },
+              "userInfo" : {
+                "editable" : true,
+                "label" : "",
+                "autogeneratedLabel" : true,
+                "order" : 0
+              }
+            } ]
+          } ],
+          "editable" : true
+        }
+      },
+      "timewindow" : {
+        "hideInterval" : false,
+        "hideLastInterval" : false,
+        "hideQuickInterval" : false,
+        "hideAggregation" : true,
+        "hideAggInterval" : true,
+        "hideTimezone" : true,
+        "selectedTab" : 0,
+        "realtime" : {
+          "realtimeType" : 0,
+          "timewindowMs" : 630720000000,
+          "quickInterval" : "CURRENT_YEAR_SO_FAR",
+          "interval" : 2592000000
+        },
+        "aggregation" : {
+          "type" : "AVG",
+          "limit" : 25000
+        },
+        "timezone" : null
+      },
+      "settings" : {
+        "stateControllerId" : "entity",
+        "showTitle" : false,
+        "showDashboardsSelect" : false,
+        "showEntitiesSelect" : true,
+        "showDashboardTimewindow" : false,
+        "showDashboardExport" : false,
+        "toolbarAlwaysOpen" : true,
+        "titleColor" : "rgba(0,0,0,0.870588)",
+        "showDashboardLogo" : false,
+        "dashboardLogoUrl" : null,
+        "hideToolbar" : true,
+        "showFilters" : true,
+        "showUpdateDashboardImage" : false,
+        "dashboardCss" : ""
+      }
+    },
+    "customerId" : {
+      "entityType" : "CUSTOMER",
+      "id" : "72034f90-bc71-11ee-bf46-f528f0cf9f6e"
+    },
+    "externalId" : null,
+    "id" : {
+      "entityType" : "DASHBOARD",
+      "id" : "f1aacf50-4b9c-11f0-9a5d-9b503cbff6de"
+    },
+    "image" : null,
+    "mobileHide" : false,
+    "mobileOrder" : null,
+    "name" : "HGS Entradas MTTO Vehiculos",
+    "ownerId" : {
+      "entityType" : "CUSTOMER",
+      "id" : "72034f90-bc71-11ee-bf46-f528f0cf9f6e"
+    },
+    "title" : "HGS Entradas MTTO Vehiculos"
+  },
+  "attributes" : {
+    "SERVER_SCOPE" : [ ]
+  }
+}
